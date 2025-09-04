@@ -128,25 +128,25 @@ footer {
     }
 }
 /* --- Courses (Certificate) --- */
-.container { max-width: 1100px; margin-inline: auto; padding: 1rem; }
-.cert-header { display: grid; gap: .5rem; align-items: start; }
-.filters { display: flex; gap: .5rem; flex-wrap: wrap; }
 
+/* Filter buttons */
 .filter-btn {
   padding: .5rem .9rem;
-  border: 1px solid currentColor;
+  border: 1px solid #265382;
   background: transparent;
+  color: #265382;
   cursor: pointer;
   border-radius: .5rem;
-  transition: transform .06s ease, background-color .15s ease, color .15s ease;
+  transition: transform .06s ease, background-color .15s ease, color .15s ease, border-color .15s ease;
 }
 .filter-btn:hover { transform: translateY(-1px); }
 .filter-btn.is-active {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  background-color: #4a90e2;
+  color: #fff;
+  border-color: #4a90e2;
 }
 
-.credits { margin: .25rem 0 0; opacity: .85; }
+.credits { margin: .25rem 0 0; opacity: .9; }
 
 /* Grid of cards */
 .courses-grid {
@@ -156,29 +156,27 @@ footer {
   margin-top: 1rem;
 }
 
-/* Card base – inherits your page color scheme via currentColor */
+/* Card base */
 .course-card {
   position: relative;
   border: 1px solid rgba(0,0,0,.15);
   border-radius: .9rem;
   padding: 1rem;
-  background: rgba(0,0,0,.03);
+  background: #fafafa;
   box-shadow: 0 1px 6px rgba(0,0,0,.08);
 }
-:where(body):has(header nav a) .course-card { /* keep neutral in both light/dark */
-  border-color: color-mix(in oklab, currentColor 20%, transparent);
-  background: color-mix(in oklab, Canvas 96%, currentColor 4%);
-  box-shadow: 0 1px 6px color-mix(in oklab, currentColor 15%, transparent);
-}
-.course-card h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
-.course-meta { font-size: .9rem; opacity: .9; display: flex; gap: .5rem; flex-wrap: wrap; }
+.course-card h3 { margin: 0 0 .25rem; font-size: 1.05rem; color: #265382; }
+.course-meta { font-size: .9rem; opacity: .9; display: flex; gap: .5rem; flex-wrap: wrap; color: #333; }
 .course-credits { font-weight: 600; }
 
 /* Completed variant – complimentary but distinct */
 .course-card.completed {
-  border-color: color-mix(in oklab, currentColor 40%, transparent);
-  background: color-mix(in oklab, Canvas 90%, currentColor 10%);
+  border-color: #3a7bc8;      /* slightly darker than header blue */
+  background: #e8f1fb;        /* light blue tint */
+  box-shadow: 0 1px 6px rgba(38,83,130,.18);
 }
+
+/* Completed badge */
 .course-card.completed::after {
   content: "✓ Completed";
   position: absolute;
@@ -186,9 +184,15 @@ footer {
   font-size: .75rem; font-weight: 700;
   padding: .2rem .5rem;
   border-radius: .4rem;
-  background: color-mix(in oklab, currentColor 20%, Canvas 80%);
-  border: 1px solid color-mix(in oklab, currentColor 35%, transparent);
+  background: #eef5ff;
+  color: #265382;
+  border: 1px solid #3a7bc8;
 }
+
+/* Container niceties (optional; keep if you like) */
+.container { max-width: 1100px; margin-inline: auto; padding: 1rem; }
+.cert-header { display: grid; gap: .5rem; align-items: start; }
+.filters { display: flex; gap: .5rem; flex-wrap: wrap; }
 
 /* Small screens */
 @media (max-width: 480px) {
