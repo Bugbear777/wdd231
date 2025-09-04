@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 231 – Web Frontend Development – Joseph Marlow</title>
+    <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
+    <meta name="author" content="Joseph Marlow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/base.css">
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/courseArray.js" defer></script>
+    <script src="scripts/courses.js" defer></script>
+
+</head>
+<body>
+    <header>
+        <span id="course-title">WDD 231 – Web Frontend Development</span>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Chamber</a></li>
+                <li><a href="#">Final</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Home</h1>
+         <div class="about-row">
+            <section>
+                <h2>About Me</h2>
+                <p>Hello, I am Joseph but I go by Guiseppe and like to play video games.</p>
+            </section>
+            <section>
+                <img src="images/profile.JPG" alt="Profile image of Guiseppe." width="200">
+            </section>
+        </div>
+
+        <section id="certificate" class="container">
+            <header class="cert-header">
+            <h2>Certificate Courses</h2>
+
+            <div class="filters" role="group" aria-label="Filter courses">
+                <button class="filter-btn is-active" data-filter="all">All Courses</button>
+                <button class="filter-btn" data-filter="WDD">WDD Courses</button>
+                <button class="filter-btn" data-filter="CSE">CSE Courses</button>
+            </div>
+
+            <p class="credits"><strong>Credits shown:</strong> <span id="creditTotal">0</span></p>
+            </header>
+
+            <div id="coursesGrid" class="courses-grid" aria-live="polite"></div>
+        </section>
+    </main>
+    <footer>
+        <a href="https://github.com/Bugbear777/wdd231">Github</a>
+        <a href="https://www.linkedin.com/in/joseph-marlow-2959a3227">LinkedIn</a>
+        <a href="https://www.facebook.com/joseph.marlow.3532">Facebook</a>
+        <p>&copy; <span id="currentyear"></span> Joseph Marlow | United States</p>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+</html>
