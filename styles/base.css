@@ -198,3 +198,4 @@ footer {
 @media (max-width: 480px) {
   .courses-grid { grid-template-columns: 1fr; }
 }
+
