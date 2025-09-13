@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const img = document.createElement('img');
       img.className = 'member-thumb';
-      img.src = m.image || '/images/member-placeholder.jpg';
+      img.src = m.image || './images/member-placeholder.jpg';
       img.alt = `${m.name}`;
 
       const main = document.createElement('div');
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // fetch members.json
   async function loadMembers() {
     try {
-      const res = await fetch('/chamber/scripts/members.json', { cache: 'no-cache' });
+      const res = await fetch('./scripts/members.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       members = data;
