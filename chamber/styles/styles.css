@@ -63,6 +63,13 @@ img, picture, video { max-width: 100%; display: block; }
   padding: 0.8rem 1rem;
 }
 
+h1#course-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--brand-dark, #222);
+}
+
 /* logo */
 .logo img { height: 40px; width:auto; display:block; }
 
