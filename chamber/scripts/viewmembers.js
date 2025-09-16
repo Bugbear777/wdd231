@@ -1,3 +1,4 @@
+
 // view-members.js
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('memberContainer');
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // fetch members.json
   async function loadMembers() {
     try {
-      const res = await fetch('./scripts/members.json', { cache: 'no-cache' });
+      const res = await fetch('/chamber/scripts/members.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       members = data;
