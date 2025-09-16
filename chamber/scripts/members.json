@@ -5,7 +5,7 @@
     "address": "120 W Roosevelt St, Phoenix, AZ 85003",
     "phone": "(602) 555-0101",
     "website": "https://www.coppercanyon.com",
-    "image": "./chamber/images/members/ccc.webp",
+    "image": "./images/members/ccc.webp",
     "membershipLevel": 3,
     "city": "Phoenix",
     "description": "Full-service business consulting and small business advisory."
@@ -16,7 +16,7 @@
     "address": "901 Central Ave, Phoenix, AZ 85004",
     "phone": "(602) 555-0112",
     "website": "https://www.desertbloomcafe.com",
-    "image": "./chamber/images/members/desertbloom.webp",
+    "image": "./images/members/desertbloom.webp",
     "membershipLevel": 2,
     "city": "Phoenix",
     "description": "Locally-sourced coffee and breakfast eatery."
@@ -27,7 +27,7 @@
     "address": "400 E Camelback Rd, Phoenix, AZ 85012",
     "phone": "(602) 555-0123",
     "website": "https://www.valleytech.com",
-    "image": "./chamber/images/members/vts.webp",
+    "image": "./images/members/vts.webp",
     "membershipLevel": 3,
     "city": "Phoenix",
     "description": "IT services, cloud solutions, and cybersecurity."
@@ -38,7 +38,7 @@
     "address": "35 N 3rd St, Phoenix, AZ 85004",
     "phone": "(602) 555-0134",
     "website": "https://www.sunriselegal.com",
-    "image": "./chamber/images/members/sl.webp",
+    "image": "./images/members/sl.webp",
     "membershipLevel": 1,
     "city": "Phoenix",
     "description": "Small-business & employment law specialists."
@@ -49,7 +49,7 @@
     "address": "22 S 1st Ave, Phoenix, AZ 85003",
     "phone": "(602) 555-0145",
     "website": "https://www.cactusgarden.com",
-    "image": "./chamber/images/members/cgl.webp",
+    "image": "./images/members/cgl.webp",
     "membershipLevel": 2,
     "city": "Tempe",
     "description": "Sustainable desert landscaping for homes and businesses."
@@ -60,7 +60,7 @@
     "address": "890 N 7th Ave, Phoenix, AZ 85007",
     "phone": "(602) 555-0156",
     "website": "https://www.ironhorsegym.com",
-    "image": "./chamber/images/members/ironhorse.webp",
+    "image": "./images/members/ironhorse.webp",
     "membershipLevel": 1,
     "city": "Phoenix",
     "description": "Fitness & wellness center with group classes."
@@ -71,7 +71,7 @@
     "address": "610 S 2nd St, Phoenix, AZ 85003",
     "phone": "(602) 555-0167",
     "website": "https://www.redmesatravel.com",
-    "image": "./chamber/images/members/redmesa.webp",
+    "image": "./images/members/redmesa.webp",
     "membershipLevel": 3,
     "city": "Mesa",
     "description": "Corporate travel management and leisure packages."
