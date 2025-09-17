@@ -9,12 +9,11 @@
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 
 
-<link rel="stylesheet" href="/chamber/styles/directory.css">
+<link rel="stylesheet" href="styles/directory.css">
 
-<script src="/chamber/scripts/getdates.js" defer></script>
-<script src="/chamber/scripts/toggleviews.js" defer></script>
-<script src="/chamber/scripts/viewmembers.js" defer></script>
-<script src="/chamber/scripts/members.json" defer></script>
+<script src="scripts/getdates.js" defer></script>
+<script src="scripts/toggleviews.js" defer></script>
+<script src="scripts/viewmembers.js" defer></script>
 
   <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
   <meta name="author" content="Joseph Marlow">
@@ -30,31 +29,47 @@
   <meta property="og:image" content="./chamber/images/chamber-logo.webp" />
 </head>
 <body>
-  <header>
-    <nav>
+   <header class="site-header">
+    <div class="header-inner">
+      <button id="navToggle" class="nav-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Open navigation">
+        <span class="hamburger"></span>
+      </button>
+
+      <a class="logo" href="./index.html">
+        <img src="./images/chamber-logo.webp" alt="Arizona Chamber logo" />
+        <span class="sr-only">Arizona Chamber</span>
+      </a>
+
+      <nav id="mainNav" class="main-nav" aria-label="Primary">
         <ul>
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./directory.html">Directory</a></li>
-            <li><a href="#">Join</a></li>
-            <li><a href="#">Discovery</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="./directory.html" class="active">Directory</a></li>
+          <li><a href="#">Join</a></li>
+          <li><a href="#">Discovery</a></li>
         </ul>
-    </nav>
-</header>
+      </nav>
 
-<main>
-    <h1 id="course-title">Directory</h1>
-
-    <div class="view-toggle">
-        <button id="gridViewBtn">Grid View</button>
-        <button id="listViewBtn">List View</button>
+      <div class="header-meta">
+        <h1 id="course-title">Directory</h1>
+      </div>
     </div>
+  </header>
 
-    <div id="memberContainer" class="grid-view">
-        <div class="member-card">Member 1</div>
-        <div class="member-card">Member 2</div>
-        <div class="member-card">Member 3</div>
-    </div>
-</main>
+ <main class="container">
+    <section class="controls">
+      <div class="view-toggle" role="toolbar" aria-label="Change directory view">
+        <button id="gridViewBtn" class="view-btn" type="button" aria-pressed="true" title="Grid view">Grid</button>
+        <button id="listViewBtn" class="view-btn" type="button" aria-pressed="false" title="List view">List</button>
+        <div class="count" id="memberCount" aria-live="polite"></div>
+      </div>
+      <div class="search-wrap">
+        <label for="memberSearch" class="sr-only">Search members</label>
+        <input id="memberSearch" type="search" placeholder="Search members (name, city, level)..." />
+      </div>
+    </section>
+
+    <section id="memberContainer" class="members grid-view" aria-live="polite"></section>
+  </main>
 
 
   <footer class="site-footer">

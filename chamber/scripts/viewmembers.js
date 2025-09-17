@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('memberSearch');
   const navToggle = document.getElementById('navToggle');
   const header = document.querySelector('.site-header');
+  
 
   let members = [];   // fetched JSON
   let filtered = [];  // after search
@@ -91,20 +92,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // fetch members.json
-  async function loadMembers() {
-    try {
-      const res = await fetch('/chamber/scripts/members.json', { cache: 'no-cache' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      members = data;
-      filtered = members.slice();
-      renderMembers(filtered);
-    } catch (err) {
-      console.error('Failed to load members:', err);
-      container.innerHTML = '<p class="error">Unable to load members. Please try again later.</p>';
-      countEl.textContent = '';
-    }
+ async function loadMembers() {
+  try {
+    const res = await fetch('scripts/members.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    members = data;
+    filtered = members.slice();
+    renderMembers(filtered);
+  } catch (err) {
+    console.error('Failed to load members:', err);
+    container.innerHTML = '<p class="error">Unable to load members. Please try again later.</p>';
+    countEl.textContent = '';
   }
+}
+
 
   // view toggle
   function setView(mode) {

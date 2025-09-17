@@ -120,7 +120,7 @@ h1#course-title {
 /* Controls row */
 .controls { display:flex; justify-content:space-between; gap:1rem; align-items:center; margin: 1rem 0; flex-wrap:wrap; }
 .view-toggle { display:flex; gap:0.5rem; align-items:center; }
-.view-btn {
+.gridViewBtn {
   border:1px solid rgba(0,0,0,0.08);
   background: white;
   padding: 0.45rem 0.7rem;
@@ -128,7 +128,7 @@ h1#course-title {
   cursor:pointer;
   font-weight:600;
 }
-.view-btn[aria-pressed="true"] {
+.gridViewBtn[aria-pressed="true"] {
   background: linear-gradient(180deg, #ffffff, #fcf6ea);
   border-color: rgba(0,0,0,0.06);
   box-shadow: var(--shadow-sm);
@@ -144,7 +144,7 @@ h1#course-title {
 }
 
 /* Members container - default grid view */
-.members.grid-view {
+#memberContainer.grid-view {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
@@ -291,5 +291,5 @@ h1#course-title {
   .search-wrap input { min-width: 0; width: 100%; }
   .controls { flex-direction:column; align-items:stretch; gap:0.6rem; }
   .card-meta { text-align:left; min-width: 0; }
-  .members.grid-view { grid-template-columns: 1fr; }
+  #memberContainer.grid-view { grid-template-columns: 1fr; }
 }
