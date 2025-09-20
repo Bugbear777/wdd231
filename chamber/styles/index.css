@@ -1,0 +1,40 @@
+/* HERO */
+.hero { position: relative; width: 100%; overflow: hidden; }
+.hero-media img {
+  width: 100%;
+  height: 44vh;           /* adjust to taste */
+  max-height: 560px;
+  object-fit: cover;
+  display: block;
+}
+.hero-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.5rem;
+  color: white;
+  text-shadow: 0 6px 18px rgba(8,10,14,0.4);
+}
+.hero-overlay h1 { font-size: 2.2rem; margin: 0 0 0.4rem 0; color: #fff; }
+.hero-overlay .lead { margin: 0 0 1rem 0; font-size: 1.05rem; color: #f7f9fb; }
+
+/* Simple button styles if not present */
+.btn { display:inline-block; padding:0.5rem 0.85rem; border-radius:8px; text-decoration:none; background:transparent; border:1px solid rgba(255,255,255,0.18); color: #fff; font-weight:700; }
+.btn-primary { background: var(--accent-gold); color: #2c1500; border: none; }
+
+/* Three-up block row */
+.three-up { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; align-items:start; }
+.card { background: var(--card-bg); border-radius: var(--radius); padding: 1rem; box-shadow: var(--shadow-sm); border: 1px solid rgba(20,20,20,0.03); }
+.card h2 { margin-top: 0; color: var(--brand-teal-2); }
+
+/* Spotlights */
+.spotlight-grid { margin-top: 1rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.spotlight-card { display: flex; gap: 1rem; align-items: center; padding: 0.75rem; background: var(--card-bg); border-radius: 10px; border: 1px solid rgba(0,0,0,0.03); }
+.spot-thumb { width: 110px; height: 80px; object-fit: cover; border-radius: 6px; }
+
+/* Responsive adjustments */
+@media (max-width: 920px) {
+  .three-up { grid-template-columns: 1fr; }
+  .hero-media img { height: 38vh; }
+  .hero-overlay { position: static; padding: 1rem 0; background: linear-gradient(180deg, rgba(0,0,0,0.35), transparent); }
+}

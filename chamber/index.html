@@ -10,10 +10,7 @@
 
 
   <link rel="stylesheet" href="styles/directory.css">
-
-<script src="scripts/getdates.js" defer></script>
-<script src="scripts/toggleviews.js" defer></script>
-<script src="scripts/viewmembers.js" defer></script>
+  <link rel="stylesheet" href="styles/index.css">
 
   <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
   <meta name="author" content="Joseph Marlow">
@@ -29,14 +26,17 @@
   <meta property="og:url" content="https://Bugbear777.github.io/wdd231/chamber/directory">
   <meta property="og:image" content="./chamber/images/chamber-logo.webp" />
 </head>
-<body>
-    <header class="site-header">
-    <div class="header-inner">
+<body
+  data-owm-key="0fdbe923910a1b7dcf5b614a21c7fa24"
+  data-members-src="./scripts/members.json"
+>
+  <header class="site-header">
+    <div class="header-inner container">
       <button id="navToggle" class="nav-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Open navigation">
         <span class="hamburger"></span>
       </button>
 
-      <a class="logo" href="./index.html">
+      <a class="logo" href="./index.html" title="Arizona Chamber">
         <img src="./images/chamber-logo.webp" alt="Arizona Chamber logo" />
         <span class="sr-only">Arizona Chamber</span>
       </a>
@@ -45,8 +45,8 @@
         <ul>
           <li><a href="./index.html" class="active">Home</a></li>
           <li><a href="./directory.html">Directory</a></li>
-          <li><a href="#">Join</a></li>
-          <li><a href="#">Discovery</a></li>
+          <li><a href="./join.html">Join</a></li>
+          <li><a href="./events.html">Events</a></li>
         </ul>
       </nav>
 
@@ -55,30 +55,95 @@
       </div>
     </div>
   </header>
-<main></main>
-<footer class="site-footer">
-    <div class="container footer-grid" role="contentinfo">
-        <div class="footer-col">
-            <p><strong>Arizona Chamber of Commerce</strong></p>
-            <p>100 N 7th Ave</p>
-            <p>Phoenix, AZ 85007</p>
-            <p>membership@azchamber.com</p>
-            <p>(602) 248-4430</p>
-        </div>
 
-        <div class="footer-col">
-            <p><a href="https://github.com/Bugbear777/wdd231">Github</a></p>
-            <p><a href="https://www.linkedin.com/in/joseph-marlow-2959a3227">LinkedIn</a></p>
-            <p><a href="https://www.facebook.com/joseph.marlow.3532">Facebook</a></p>
-        </div>
+  <main>
+    <section class="hero" aria-label="Hero">
+      <div class="hero-media" role="img" aria-label="Downtown Phoenix skyline">
+        <img src="./images/hero-phoenix.webp" alt="Phoenix skyline at sunset" />
+      </div>
 
-        <div class="footer-col">
-            <p>WDD231 Class Project</p>
-            <p>Joseph Marlow</p>
-            <p>&copy; <span id="currentyear"></span> Arizona Chamber of Commerce</p>
-            <p id="lastModified"></p>
-        </div>
+      <div class="hero-overlay container">
+        <h1>Supporting Local Business — Grow with the Chamber</h1>
+        <p class="lead">Networking, advocacy, and resources for Arizona businesses of every size.</p>
+        <p>
+          <a href="./join.html" class="btn btn-primary" id="cta-join">Join the Chamber</a>
+          <a href="./events.html" class="btn" id="cta-events">See upcoming events</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="three-up container" aria-label="Highlights">
+  <!-- Block 1: Current Events -->
+  <div class="card" id="events-card" aria-labelledby="events-heading">
+    <h2 id="events-heading">Current Events</h2>
+    <div id="events-list" class="events-list">
+      <!-- events.js inserts event articles here -->
     </div>
-</footer>
+    <a href="./events.html" class="link-more">View all events</a>
+  </div>
+
+  <!-- Block 2: Current Weather -->
+  <div class="card" id="weather-current-card" aria-labelledby="weather-current-heading">
+    <h2 id="weather-current-heading">Current Weather</h2>
+
+    <div id="weather-current" class="weather-current" aria-live="polite">
+      <!-- weather.js will populate: current temp + description -->
+      <p class="temp">--°</p>
+      <p class="condition">Loading weather…</p>
+    </div>
+
+    <p class="muted small">Weather data provided by OpenWeather.</p>
+  </div>
+
+  <!-- Block 3: 3-Day Forecast -->
+  <div class="card" id="weather-forecast-card" aria-labelledby="weather-forecast-heading">
+    <h2 id="weather-forecast-heading">3-Day Forecast</h2>
+
+    <div id="weather-forecast" class="weather-forecast" aria-hidden="false">
+      <!-- weather.js will render a properly labeled 3-day forecast here -->
+      <ul class="forecast-list">
+        <li>Loading forecast…</li>
+      </ul>
+    </div>
+
+    <p class="muted small">Forecast provided by OpenWeather.</p>
+  </div>
+</section>
+
+    <section class="spotlights container" aria-label="Member spotlights">
+      <h2>Member Spotlights</h2>
+
+      <div class="spotlight-grid" id="spotlight-grid">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <p><strong>Arizona Chamber of Commerce</strong></p>
+        <p>100 N 7th Ave</p>
+        <p>Phoenix, AZ 85007</p>
+      </div>
+
+      <div class="footer-col">
+        <p><a href="https://github.com/Bugbear777/wdd231">Github</a></p>
+        <p><a href="https://www.linkedin.com/in/joseph-marlow-2959a3227">LinkedIn</a></p>
+        <p><a href="https://www.facebook.com/joseph.marlow.3532">Facebook</a></p>
+      </div>
+
+      <div class="footer-col">
+        <p>&copy; <span id="currentyear"></span> Arizona Chamber of Commerce</p>
+        <p id="lastModified"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/getdates.js" defer></script>
+  <script src="scripts/weather.js" defer></script>
+  <script src="scripts/spotlights.js" defer></script>
+  <script src="scripts/toggleviews.js" defer></script>
+  <script src="scripts/viewmembers.js" defer></script>
+
 </body>
 </html>
