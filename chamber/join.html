@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Directory | Arizona Chamber of Commerce</title>
+    <title>Join | Arizona Chamber of Commerce</title>
 
 
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 
 
-<link rel="stylesheet" href="styles/directory.css">
+    <link rel="stylesheet" href="styles/directory.css">
 
-<script src="scripts/getdates.js" defer></script>
-<script src="scripts/toggleviews.js" defer></script>
-<script src="scripts/viewmembers.js" defer></script>
+    <script src="scripts/getdates.js" defer></script>
+    <script src="scripts/toggleviews.js" defer></script>
+    <script src="scripts/viewmembers.js" defer></script>
+    <script src="scripts/modals.js" defer></script>
 
   <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
   <meta name="author" content="Joseph Marlow">
@@ -28,7 +29,7 @@
   <meta property="og:url" content="https://Bugbear777.github.io/wdd231/chamber/directory">
   <meta property="og:image" content="./chamber/images/chamber-logo.webp" />
 </head>
-<body>
+<body class="join-page">
    <header class="site-header">
     <div class="header-inner">
       <button id="navToggle" class="nav-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Open navigation">
@@ -45,7 +46,7 @@
           <li><a href="./index.html">Home</a></li>
           <li><a href="./directory.html">Directory</a></li>
           <li><a href="./join.html" class="active">Join</a></li>
-          <li><a href="#">Discovery</a></li>
+          <li><a href="./discover.html">Discovery</a></li>
         </ul>
       </nav>
 
@@ -55,7 +56,129 @@
     </div>
   </header>
 
- <main></main>
+ <main>
+    <div class="form-container">
+        <form method="get" action="thankyou.html">
+            <label for="fname">First Name:
+                <input type="text" id="fname" name="firstname" title="Enter your first name" placeholder="Your name.." autocomplete="given-name" required>
+            </label>
+            
+            <label for="lname">Last Name:
+                <input type="text" id="lname" name="lastname" title="Enter your last name" placeholder="Your last name.." autocomplete="family-name" required>
+            </label>
+            
+            <label for="email">Email:
+                <input type="email" id="email" name="email" title="Enter a valid email address" placeholder="example@domain.com" autocomplete="email" required>
+            </label>
+            
+            <label for="organization">Organizational Title:
+                <input type="text" id="organization" name="organization" title="Enter your organizational title (letters, hyphens, spaces only)" placeholder="Your title.." autocomplete="organization-title" pattern="[A-Za-z\- ]{7,}">
+            </label>
+            
+            <label for="phone">Phone Number:
+                <input type="tel" id="phone" name="phone" title="Enter your mobile phone number" placeholder="Your phone number.." autocomplete="tel" required>
+            </label>
+
+            <label for="company">Company Name:
+                <input type="text" id="company" name="company" title="Enter your company or organization name" placeholder="Your company.." autocomplete="organization" required>
+            </label>
+            
+            <label for="membership">Membership Level:
+                <select id="membership" name="membership" required>
+                    <option value="">Select a membership level</option>
+                    <option value="free">NP Membership (No Fee)</option>
+                    <option value="basic">Bronze - $100/year</option>
+                    <option value="premium">Silver - $250/year</option>
+                    <option value="enterprise">Gold - $500/year</option>
+                </select>
+            </label>
+
+
+            <label for="comments">Business Description:
+                <textarea id="comments" name="comments" title="Describe your business or organization" placeholder="Write something.." style="height:200px"></textarea>
+            </label>
+            
+            <input type="hidden" id="timestamp" name="timestamp">
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="form-cards">
+        <div class="form-card">
+            <h3>Non-Profit Membership</h3>
+            <p>Ideal for non-profit organizations looking to connect with the business community. Enjoy access to networking events and resources at no cost.</p>
+            <a href="#" data-modal="modal-np">Learn More</a>
+        </div>
+        <div class="form-card">
+            <h3>Bronze Membership</h3>
+            <p>$100/year – Perfect for small businesses seeking to enhance their visibility. Includes basic listing in our directory and invitations to select events.</p>
+            <a href="#" data-modal="modal-bronze">Learn More</a>
+        </div>
+        <div class="form-card">
+            <h3>Silver Membership</h3>
+            <p>$250/year – Designed for growing businesses. Offers enhanced directory listings, priority event invitations, and access to exclusive webinars.</p>
+            <a href="#" data-modal="modal-silver">Learn More</a>
+        </div>
+        <div class="form-card">
+            <h3>Gold Membership</h3>
+            <p>$500/year – Best for established businesses aiming for maximum exposure. Includes premium directory placement, VIP event access, and personalized support.</p>
+            <a href="#" data-modal="modal-gold">Learn More</a>
+        </div>
+    </div>
+
+    <div id="modal-np" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal="modal-np">&times;</span>
+            <h2>Non-Profit Membership Details</h2>
+            <p>Our Non-Profit Membership is tailored for organizations dedicated to making a positive impact in our community. This membership level provides access to networking events, educational resources, and opportunities to collaborate with local businesses, all at no cost.</p>
+            <ul>
+                <li>Access to networking events</li>
+                <li>Educational resources and workshops</li>
+                <li>Opportunities for collaboration with local businesses</li>
+                <li>Inclusion in our online directory</li>
+            </ul>
+        </div>
+    </div>
+    <div id="modal-bronze" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal="modal-bronze">&times;</span>
+            <h2>Bronze Membership Details</h2>
+            <p>The Bronze Membership is perfect for small businesses looking to increase their visibility within the local business community. This membership level includes a basic listing in our directory, invitations to select networking events, and access to member-only resources.</p>
+            <ul>
+                <li>Basic listing in our online directory</li>
+                <li>Invitations to select networking events</li>
+                <li>Access to member-only resources and newsletters</li>
+                <li>Discounts on workshops and seminars</li>
+            </ul>
+        </div>
+    </div>
+    <div id="modal-silver" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal="modal-silver">&times;</span>
+            <h2>Silver Membership Details</h2>
+            <p>The Silver Membership is designed for growing businesses that want to enhance their presence in the community. This membership level offers an enhanced directory listing, priority invitations to events, and access to exclusive webinars and training sessions.</p>
+            <ul>
+                <li>Enhanced listing in our online directory</li>
+                <li>Priority invitations to networking events</li>
+                <li>Access to exclusive webinars and training sessions</li>
+                <li>Opportunities for sponsorship and advertising</li>
+            </ul>
+        </div>
+    </div>
+    <div id="modal-gold" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-modal="modal-gold">&times;</span>
+            <h2>Gold Membership Details</h2>
+            <p>The Gold Membership is our premier offering, ideal for established businesses seeking maximum exposure and engagement. This membership level includes premium placement in our directory, VIP access to events, and personalized support from our team.</p>
+            <ul>
+                <li>Premium placement in our online directory</li>
+                <li>VIP access to all networking events</li>
+                <li>Personalized support and consultation</li>
+                <li>Opportunities for featured articles and interviews</li>
+            </ul>
+        </div>
+    </div>
+ </main>
 
 
   <footer class="site-footer">
