@@ -84,6 +84,10 @@ function renderCourses(list) {
 
   grid.appendChild(fragment);
   updateCredits(list);
+
+  courseDiv.addEventListener('click', () => {
+  displayCourseDetails(course);
+});
 }
 
 function updateCredits(list) {
