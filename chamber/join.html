@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
 
 
+    <link rel="stylesheet" href="styles/join.css">
     <link rel="stylesheet" href="styles/directory.css">
 
     <script src="scripts/getdates.js" defer></script>
@@ -103,50 +104,54 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-    <div class="card-container">
-        <div class="card">
+    <div class="card-container" id="cards">
+        <div class="card" id="non-profit">
+            <div class="badge">Free</div>
             <h3>Non-Profit Membership</h3>
             <p>Connect with the business community and enjoy access to networking events.</p>
-            <a href="#" class="open-dialog" data-modal="modal1">Learn More</a>
+            <button class="cta np open-dialog" data-modal="modal-np">Learn More</button>
         </div>
         
-        <div class="card">
+        <div class="card" id="bronze">
+            <div class="badge">Starting Out Package</div>
             <h3>Bronze Membership</h3>
-            <p>Connect with the business community and enjoy access to networking events.</p>
-            <a href="#" class="open-dialog" data-modal="modal2">Learn More</a>
+            <p>Starter membership with essential features — great for exploring.</p>
+            <button class="cta bronze open-dialog" data-modal="modal-bronze">Learn More</button>
         </div>
         
-        <div class="card">
+        <div class="card" id="silver">
+            <div class="badge">Popular</div>
             <h3>Silver Membership</h3>
-            <p>Connect with the business community and enjoy access to networking events.</p>
-            <a href="#" class="open-dialog" data-modal="modal3">Learn More</a>
+            <p>Extra perks and higher usage limits for growing members.</p>
+            <button class="cta silver open-dialog" data-modal="modal-silver">Learn More</button>
         </div>
         
-        <div class="card">
+        <div class="card" id="gold">
+            <div class="badge">Enterprise</div>
             <h3>Gold Membership</h3>
-            <p>Connect with the business community and enjoy access to networking events.</p>
-            <a href="#" class="open-dialog" data-modal="modal4">Learn More</a>
+            <p>All features unlocked, priority support, and exclusive add-ons.</p>
+            <button class="cta gold open-dialog" data-modal="modal-gold">Learn More</button>
         </div>
     </div>
-        <dialog id="modal1">
+        <dialog id="modal-np">
             <h3>More Info</h3>
             <p>This is where you could add more detailed information about the Non-Profit membership.</p>
-            <button class="close-btn">Close</button>
+            <button class="dialog-close">Close</button>
         </dialog>
-        <dialog id="modal2">
+        <dialog id="modal-bronze">
             <h3>More Info</h3>
             <p>This is where you could add more detailed information about the Bronze membership.</p>
-            <button class="close-btn">Close</button>
+            <button class="dialog-close">Close</button>
         </dialog>
-        <dialog id="modal3">
+        <dialog id="modal-silver">
             <h3>More Info</h3>
             <p>This is where you could add more detailed information about the Silver membership.</p>
-            <button class="close-btn">Close</button>
+            <button class="dialog-close">Close</button>
         </dialog>
-        <dialog id="modal4">
+        <dialog id="modal-gold">
             <h3>More Info</h3>
             <p>This is where you could add more detailed information about the Gold membership.</p>
-            <button class="close-btn">Close</button>
+            <button class="dialog-close">Close</button>
         </dialog>
     <script src="scripts/modal.js" defer></script>
  </main>

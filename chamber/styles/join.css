@@ -1,0 +1,182 @@
+:root{
+    --card-bg: #fff;
+    --muted: #6b7280;
+    --container-max: 1100px;
+    --accent-1: #1d4ed8; /* blue */
+    --accent-2: #059669; /* green */
+    --accent-3: #d97706; /* amber */
+    --accent-4: #7c3aed; /* violet */
+  }
+
+body.join-page {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    /* Form + Cards Container */
+    .form-container {
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type=submit] {
+    width: 100%;
+    background-color: #0b5960;
+    color: white;
+    padding: 14px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type=submit]:hover {
+  background-color: #0f7484;
+  }
+
+  .card-container{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+.card {
+    flex: 1 1 220px;
+    max-width: 260px;
+    min-width: 200px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+    padding: 1.15rem;
+    text-align: left;
+    transform-origin: center;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    position: relative;
+    overflow: visible;
+  }
+
+  .card h4 { margin: 0 0 .35rem 0; font-size: 1.05rem; }
+  .card p { margin: 0 0 .8rem 0; color: var(--muted); font-size: .95rem; }
+
+  .cta {
+    display: inline-block;
+    padding: .45rem .85rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .9rem;
+    cursor: pointer;
+    border: 0;
+  }
+
+  /* subtle hover for interactivity (NOT the initial animation) */
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(2,6,23,0.12); }
+  .card:active { transform: translateY(-2px) scale(.997); }
+
+  /* --- Entrance animations (keyframes) --- */
+  @keyframes fadeSlideUp {
+    0%   { opacity: 0; transform: translateY(18px) scale(.996); }
+    60%  { opacity: 1; transform: translateY(-6px) scale(1.003); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes colorPulse {
+    0%   { opacity: 0; transform: translateX(-18px) rotate(-1deg); filter: saturate(.9); }
+    50%  { filter: saturate(1.06); box-shadow: 0 14px 34px rgba(59,130,246,0.06); }
+    100% { opacity: 1; transform: translateX(0) rotate(0); filter: none; }
+  }
+
+  @keyframes softRise {
+    0%   { opacity: 0; transform: translateY(28px) scale(.99); }
+    80%  { opacity: 1; transform: translateY(-4px) scale(1.005); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes slightGrow {
+    0%   { opacity: 0; transform: scale(.98) translateY(12px); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+    70%  { opacity: 1; transform: scale(1.008) translateY(-6px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Assign each card a different entrance, with staggered delays */
+  .card[data-level="np"] {
+    border-left: 4px solid var(--accent-1);
+    animation: fadeSlideUp 560ms cubic-bezier(.2,.9,.2,1) both;
+    animation-delay: 120ms;
+  }
+
+  .card[data-level="bronze"] {
+    border-left: 4px solid var(--accent-2);
+    animation: colorPulse 640ms cubic-bezier(.15,.85,.25,1) both;
+    animation-delay: 260ms;
+  }
+
+  .card[data-level="silver"] {
+    border-left: 4px solid var(--accent-3);
+    animation: softRise 700ms cubic-bezier(.18,.9,.32,1) both;
+    animation-delay: 380ms;
+  }
+
+  .card[data-level="gold"] {
+    border-left: 4px solid var(--accent-4);
+    animation: slightGrow 760ms cubic-bezier(.22,.86,.28,1) both;
+    animation-delay: 500ms;
+  }
+
+   /* small label in top-right for flavor */
+  .badge {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    font-size: .78rem;
+    padding: .18rem .5rem;
+    border-radius: 999px;
+    background: #0b5960ce;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card[data-level] {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+     /* dialog styling */
+  dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 1.1rem;
+    max-width: 420px;
+    width: calc(100% - 2rem);
+    box-shadow: 0 12px 40px rgba(2,6,23,0.16);
+  }
+  dialog::backdrop { background: rgba(2,6,23,0.45); }
+
+  .dialog-close {
+    margin-top: 1rem;
+    padding: .45rem .75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background: #e5e7eb;
+  }
