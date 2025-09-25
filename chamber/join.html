@@ -14,7 +14,7 @@
     <script src="scripts/getdates.js" defer></script>
     <script src="scripts/toggleviews.js" defer></script>
     <script src="scripts/viewmembers.js" defer></script>
-    <script src="scripts/modals.js" defer></script>
+    
 
   <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
   <meta name="author" content="Joseph Marlow">
@@ -103,81 +103,52 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-    <div class="form-cards">
-        <div class="form-card">
+    <div class="card-container">
+        <div class="card">
             <h3>Non-Profit Membership</h3>
-            <p>Ideal for non-profit organizations looking to connect with the business community. Enjoy access to networking events and resources at no cost.</p>
-            <a href="#" class="modal-link" data-modal="modal-np">Learn More</a>
+            <p>Connect with the business community and enjoy access to networking events.</p>
+            <a href="#" class="open-dialog" data-modal="modal1">Learn More</a>
         </div>
-        <div class="form-card">
+        
+        <div class="card">
             <h3>Bronze Membership</h3>
-            <p>$100/year – Perfect for small businesses seeking to enhance their visibility. Includes basic listing in our directory and invitations to select events.</p>
-            <a href="#" data-modal="modal-bronze">Learn More</a>
+            <p>Connect with the business community and enjoy access to networking events.</p>
+            <a href="#" class="open-dialog" data-modal="modal2">Learn More</a>
         </div>
-        <div class="form-card">
+        
+        <div class="card">
             <h3>Silver Membership</h3>
-            <p>$250/year – Designed for growing businesses. Offers enhanced directory listings, priority event invitations, and access to exclusive webinars.</p>
-            <a href="#" data-modal="modal-silver">Learn More</a>
+            <p>Connect with the business community and enjoy access to networking events.</p>
+            <a href="#" class="open-dialog" data-modal="modal3">Learn More</a>
         </div>
-        <div class="form-card">
+        
+        <div class="card">
             <h3>Gold Membership</h3>
-            <p>$500/year – Best for established businesses aiming for maximum exposure. Includes premium directory placement, VIP event access, and personalized support.</p>
-            <a href="#" data-modal="modal-gold">Learn More</a>
+            <p>Connect with the business community and enjoy access to networking events.</p>
+            <a href="#" class="open-dialog" data-modal="modal4">Learn More</a>
         </div>
     </div>
-
-    <div id="modal-np" class="modal">
-        <div class="modal-content">
-            <span class="close-button" data-modal="modal-np">&times;</span>
-            <h2>Non-Profit Membership Details</h2>
-            <p>Our Non-Profit Membership is tailored for organizations dedicated to making a positive impact in our community. This membership level provides access to networking events, educational resources, and opportunities to collaborate with local businesses, all at no cost.</p>
-            <ul>
-                <li>Access to networking events</li>
-                <li>Educational resources and workshops</li>
-                <li>Opportunities for collaboration with local businesses</li>
-                <li>Inclusion in our online directory</li>
-            </ul>
-        </div>
-    </div>
-    <div id="modal-bronze" class="modal">
-        <div class="modal-content">
-            <span class="close-button" data-modal="modal-bronze">&times;</span>
-            <h2>Bronze Membership Details</h2>
-            <p>The Bronze Membership is perfect for small businesses looking to increase their visibility within the local business community. This membership level includes a basic listing in our directory, invitations to select networking events, and access to member-only resources.</p>
-            <ul>
-                <li>Basic listing in our online directory</li>
-                <li>Invitations to select networking events</li>
-                <li>Access to member-only resources and newsletters</li>
-                <li>Discounts on workshops and seminars</li>
-            </ul>
-        </div>
-    </div>
-    <div id="modal-silver" class="modal">
-        <div class="modal-content">
-            <span class="close-button" data-modal="modal-silver">&times;</span>
-            <h2>Silver Membership Details</h2>
-            <p>The Silver Membership is designed for growing businesses that want to enhance their presence in the community. This membership level offers an enhanced directory listing, priority invitations to events, and access to exclusive webinars and training sessions.</p>
-            <ul>
-                <li>Enhanced listing in our online directory</li>
-                <li>Priority invitations to networking events</li>
-                <li>Access to exclusive webinars and training sessions</li>
-                <li>Opportunities for sponsorship and advertising</li>
-            </ul>
-        </div>
-    </div>
-    <div id="modal-gold" class="modal">
-        <div class="modal-content">
-            <span class="close-button" data-modal="modal-gold">&times;</span>
-            <h2>Gold Membership Details</h2>
-            <p>The Gold Membership is our premier offering, ideal for established businesses seeking maximum exposure and engagement. This membership level includes premium placement in our directory, VIP access to events, and personalized support from our team.</p>
-            <ul>
-                <li>Premium placement in our online directory</li>
-                <li>VIP access to all networking events</li>
-                <li>Personalized support and consultation</li>
-                <li>Opportunities for featured articles and interviews</li>
-            </ul>
-        </div>
-    </div>
+        <dialog id="modal1">
+            <h3>More Info</h3>
+            <p>This is where you could add more detailed information about the Non-Profit membership.</p>
+            <button class="close-btn">Close</button>
+        </dialog>
+        <dialog id="modal2">
+            <h3>More Info</h3>
+            <p>This is where you could add more detailed information about the Bronze membership.</p>
+            <button class="close-btn">Close</button>
+        </dialog>
+        <dialog id="modal3">
+            <h3>More Info</h3>
+            <p>This is where you could add more detailed information about the Silver membership.</p>
+            <button class="close-btn">Close</button>
+        </dialog>
+        <dialog id="modal4">
+            <h3>More Info</h3>
+            <p>This is where you could add more detailed information about the Gold membership.</p>
+            <button class="close-btn">Close</button>
+        </dialog>
+    <script src="scripts/modal.js" defer></script>
  </main>
 
 
