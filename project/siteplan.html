@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Board Game Hub — Site Plan</title>
+
+  <!-- Google Fonts (used in the plan) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/siteplan.css">
+  <script src="scripts/getdates.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="logo" aria-hidden="true">BG</div>
+      <div>
+        <h1>Board Game Hub</h1>
+        <p class="lead">A compact recommendation site for casual and hobbyist board gamers — site plan.</p>
+      </div>
+    </header>
+
+    <!-- SITE NAME -->
+    <section id="site-name" aria-labelledby="site-name-heading">
+      <h2 id="site-name-heading">Site Name</h2>
+      <p><strong>BoardGameHub</strong></p>
+      <p class="muted">
+        Why this name: "BoardGameHub" is short, searchable, and clearly communicates the site’s core purpose:
+        a single place (a hub) where players can discover, filter, and pick board games for different groups and occasions.
+      </p>
+      <p class="muted"><strong>Optional domain (example):</strong> <span class="kbd">boardgamehub.dev</span> — domain availability is not required for class but this shows a plausible brand domain.</p>
+    </section>
+
+    <!-- SITE PURPOSE -->
+    <section id="site-purpose" aria-labelledby="site-purpose-heading">
+      <h2 id="site-purpose-heading">Site Purpose</h2>
+      <p>
+        BoardGameHub provides a lightweight recommendation tool for people deciding what board game to play.
+        The site will include:
+      </p>
+      <ul>
+        <li><strong>Homepage:</strong> friendly intro to board gaming and quick links to the main tools.</li>
+        <li><strong>Game Finder:</strong> searchable & filterable list of games stored in a local JSON file (player count, playtime, difficulty, genre tags).</li>
+        <li><strong>Random Game Picker:</strong> a JavaScript tool that picks a random game from the same list to solve the "what should we play?" problem fast.</li>
+      </ul>
+      <p class="muted">Additional capabilities (stretch goals): favorites stored in <code>localStorage</code>, sort-by options, small integration with an external API like Board Game Atlas for live data.</p>
+    </section>
+
+    <!-- SCENARIOS -->
+    <section id="scenarios" aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading">User Scenarios</h2>
+      <p>These are example questions (scenarios) a target visitor would ask the site. They drive the content and UI priorities.</p>
+      <ol>
+        <li><strong>“We have 4 players and only 45 minutes — what games fit that?”</strong>
+          <p class="muted">This scenario demands accurate filtering by player count and playtime and a clear sort option.</p>
+        </li>
+        <li><strong>“I want a light, family-friendly cooperative game for 2–5 players.”</strong>
+          <p class="muted">This drives the need for tags (cooperative, family) and adjustable difficulty labels.</p>
+        </li>
+        <li><strong>“I don’t care — surprise us!”</strong>
+          <p class="muted">Maps to the Random Game Picker tool that chooses from the filtered list or entire collection.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- COLOR SCHEMA -->
+    <section id="colors" aria-labelledby="colors-heading">
+      <h2 id="colors-heading">Color Schema (used on this document)</h2>
+      <p>Two primary colors plus supporting neutrals. These are applied across the plan for headings, accents, backgrounds, and UI elements.</p>
+
+      <div class="swatches" aria-hidden="false">
+        <div class="swatch" style="background:var(--primary);">
+          <div>Primary</div>
+          <small>#1F7A5A</small>
+        </div>
+        <div class="swatch" style="background:var(--accent); color:#222;">
+          <div>Accent</div>
+          <small>#F0C808</small>
+        </div>
+        <div class="swatch" style="background:var(--muted);">
+          <div>Muted text</div>
+          <small>#5B6B63</small>
+        </div>
+        <div class="swatch" style="background:var(--bg); color:var(--muted); border:1px solid var(--border);">
+          <div>Background</div>
+          <small>#F7FBF6</small>
+        </div>
+      </div>
+
+      <h3 style="margin-top:12px;">Where each color is used</h3>
+      <ul class="muted">
+        <li><strong>--primary (#1F7A5A):</strong> page headings, primary CTA buttons, active nav states, logo background.</li>
+        <li><strong>--accent (#F0C808):</strong> badges (e.g., "Quick Pick"), highlights, promotional banners, small icons.</li>
+        <li><strong>--muted (#5B6B63):</strong> secondary text, meta info (playtime, player count), form helper text.</li>
+        <li><strong>--bg & --card-bg:</strong> page background and white content cards for contrast and readability.</li>
+      </ul>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section id="typography" aria-labelledby="typography-heading">
+      <h2 id="typography-heading">Typography</h2>
+      <p>No more than three fonts — chosen for readability and a friendly, modern aesthetic.</p>
+
+      <div class="type-samples">
+        <div class="type-card">
+          <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--primary);">Playfair Display — Headings</div>
+          <p class="muted">Use for: main headings (H1, H2) and hero titles to add a touch of character.</p>
+        </div>
+
+        <div class="type-card">
+          <div style="font-family:'Inter',sans-serif; font-weight:600; font-size:16px;">Inter — Body & UI</div>
+          <p class="muted">Use for: body paragraphs, navigation, form inputs, and labels. Inter is readable at small sizes and works well for UIs.</p>
+        </div>
+      </div>
+
+      <p style="margin-top:8px;" class="muted"><strong>Font choices applied in this plan:</strong> Playfair Display for headings and Inter for body text (both loaded from Google Fonts at the top of this document).</p>
+    </section>
+
+    <!-- WIREFRAMES -->
+    <section id="wireframe" aria-labelledby="wireframe-heading">
+      <h2 id="wireframe-heading">Wireframe — Home Page (mobile & desktop)</h2>
+      <p class="muted">Sketches below are simplified layout diagrams showing content blocks and hierarchy. They focus on the three main features: hero, game finder, random picker.</p>
+
+      <div class="wireframes">
+        <!-- Mobile -->
+        <div class="wf" role="img" aria-label="Mobile wireframe">
+          <div class="device-label">Mobile view (vertical)</div>
+          <div class="box hero" style="background:linear-gradient(135deg,var(--primary),#2f9c74); color:white;">Hero — site name + CTA</div>
+          <div class="box">
+            <div style="font-weight:700; color:var(--primary); margin-bottom:6px;">Quick actions</div>
+            <div style="display:flex; gap:8px;">
+              <div style="flex:1; text-align:center; padding:10px; border-radius:8px; background:var(--accent); color:#222;">Random Pick</div>
+              <div style="flex:1; text-align:center; padding:10px; border-radius:8px; background:#ffffff; border:1px solid var(--border); color:var(--muted);">Find Games</div>
+            </div>
+          </div>
+
+          <div class="box">
+            <div style="font-weight:700; color:var(--primary); margin-bottom:6px;">Game Finder (filters)</div>
+            <div class="list-item">Filter: players / playtime / difficulty</div>
+            <div class="list-item">Result list (compact card)</div>
+          </div>
+
+          <div class="box">
+            <div style="font-weight:700; color:var(--primary); margin-bottom:6px;">Footer / Links</div>
+            <div class="muted">Accessibility, About, Data source (local JSON / optional API)</div>
+          </div>
+        </div>
+
+        <!-- Desktop -->
+        <div class="wf" role="img" aria-label="Desktop wireframe">
+          <div class="device-label">Desktop view (wide)</div>
+          <div class="hero box" style="height:96px; display:flex; align-items:center;">
+            <div style="flex:1;">
+              <div style="font-size:18px; font-weight:700; color:var(--primary);">Hero — BoardGameHub</div>
+              <div class="muted">Intro + short value statement + CTA</div>
+            </div>
+            <div style="width:220px; text-align:right;">
+              <div style="padding:8px 12px; border-radius:8px; background:var(--accent); display:inline-block; font-weight:700;">Random Pick</div>
+            </div>
+          </div>
+
+          <div class="grid box" style="grid-template-columns: 320px 1fr;">
+            <div>
+              <div style="font-weight:700; color:var(--primary); margin-bottom:6px;">Filters</div>
+              <div class="list-item">Players</div>
+              <div class="list-item">Playtime</div>
+              <div class="list-item">Difficulty</div>
+              <div class="list-item">Tags (co-op, family, strategy)</div>
+            </div>
+
+            <div>
+              <div style="font-weight:700; color:var(--primary); margin-bottom:6px;">Results</div>
+              <div class="list-item">Game result card</div>
+              <div class="list-item">Game result card</div>
+              <div class="list-item">Game result card</div>
+            </div>
+          </div>
+
+          <div class="box" style="display:flex; gap:12px; align-items:center;">
+            <div style="flex:1;">
+              <div style="font-weight:700; color:var(--primary);">Quick Picks & Features</div>
+              <div class="muted">Save favorites, share list, import/export local JSON</div>
+            </div>
+            <div style="width:200px; text-align:right;" class="muted">Accessibility: keyboard-first, ARIA labels, good color contrast</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:8px;">Notes: the desktop layout places filters front-left and results right, while mobile stacks content vertically for quick tapping. The Random Pick is always visible as a primary CTA (top-right or top of mobile quick actions).</p>
+    </section>
+
+    <!-- CSS / Implementation notes -->
+    <section id="css-note" aria-labelledby="css-note-heading">
+      <h2 id="css-note-heading">CSS & Implementation Notes</h2>
+      <ul>
+        <li>All site pages will reuse the same color variables defined at the top to ensure consistent theming.</li>
+        <li>Typography: Google Fonts loaded in the document head; use CSS variables to switch weights for headings and body text.</li>
+        <li>Styling approach: a small global CSS file (or a few components) is sufficient — keep styles modular (header.css, finder.css, picker.css) if splitting files for the project.</li>
+        <li>Data: initial development will use a local <code>games.json</code> file with ~20 sample games (fields: id, name, minPlayers, maxPlayers, playtimeMin, playtimeMax, difficulty, tags, thumbnail).</li>
+        <li>JavaScript: DOM-driven filtering and the Random Picker. Consider small utility functions for filtering, sorting, and localStorage favorites.</li>
+        <li>Accessibility checklist: keyboard navigation for filters, semantic HTML (&lt;form&gt;, &lt;label&gt;), ARIA attributes for dynamic components, and color contrast tested to WCAG AA where possible.</li>
+      </ul>
+    </section>
+
+    <footer class="site-footer">
+    <div class="container footer-grid" role="contentinfo">
+        <div class="footer-col">
+            <p><strong>Board Game Hub</strong></p>
+            <p>523 S Kirchoff</p>
+            <p>Mesa, AZ 85203</p>
+            <p>membership@boardgamehub.com</p>
+            <p>(602) 555-5555</p>
+        </div>
+
+        <div class="footer-col">
+            <p><a href="https://github.com/Bugbear777/wdd231">Github</a></p>
+            <p><a href="https://www.linkedin.com/in/joseph-marlow-2959a3227">LinkedIn</a></p>
+            <p><a href="https://www.facebook.com/joseph.marlow.3532">Facebook</a></p>
+        </div>
+
+        <div class="footer-col">
+            <p>WDD231 Class Project</p>
+            <p>Joseph Marlow</p>
+            <p>&copy; <span id="currentyear"></span> Board Game Hub</p>
+            <p id="lastModified"></p>
+        </div>
+    </div>
+</footer>
+  </main>
+</body>
+</html>

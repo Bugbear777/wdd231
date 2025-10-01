@@ -1,0 +1,146 @@
+/* === Color schema variables (use these exclusively) === */
+    :root{
+      /* Primary palette */
+      --bg: #F7FBF6;         /* page background (soft off-white) */
+      --primary: #1F7A5A;    /* primary green — headings, primary buttons */
+      --accent: #F0C808;     /* warm yellow accent — highlights, badges */
+      --muted: #5B6B63;      /* muted text and secondary elements */
+      --text: #13342B;       /* main text color (dark green) */
+      --card-bg: #FFFFFF;    /* white cards */
+      --border: #E6EFE8;     /* subtle borders */
+    }
+
+    /* Page layout & typography (follow Typography section) */
+    html,body{height:100%;}
+    body{
+      margin:0;
+      padding:32px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),#F3F9F4);
+      color:var(--text);
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .logo{
+      width:72px;
+      height:72px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--primary),#2f9c74);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-family:"Playfair Display", serif;
+      box-shadow: 0 6px 18px rgba(31,122,90,0.14);
+      flex-shrink:0;
+    }
+
+    h1{font-family:"Playfair Display",serif; font-weight:700; color:var(--primary); margin:0; font-size:28px;}
+    p.lead{margin:6px 0 0; color:var(--muted); font-size:14px;}
+
+    main{max-width:980px; margin:0 auto;}
+
+    section{background:var(--card-bg); border-radius:10px; padding:18px; margin-bottom:18px; border:1px solid var(--border); box-shadow:0 6px 14px rgba(19,52,43,0.04);}
+
+    section h2{color:var(--primary); margin-top:0; font-family:"Playfair Display",serif;}
+    .muted{color:var(--muted); font-size:14px;}
+
+    /* Color swatches */
+    .swatches{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+    .swatch{
+      width:140px; height:86px; border-radius:8px; padding:10px; color:white; font-weight:600;
+      display:flex; flex-direction:column; justify-content:flex-end; box-shadow:0 6px 12px rgba(0,0,0,0.04);
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .swatch small{font-weight:400; font-size:12px; opacity:0.95;}
+
+    /* Typography samples */
+    .type-samples{display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;}
+    .type-card{flex:1; min-width:220px; background:var(--bg); padding:12px; border-radius:8px; border:1px dashed var(--border);}
+
+    /* Wireframe diagrams (simple block sketches) */
+    .wireframes{display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;}
+    .wf{
+      flex:1; min-width:280px; background:#FFFFFF; border-radius:8px; padding:12px; border:1px solid var(--border);
+    }
+    .wf .device-label{font-size:12px; color:var(--muted); margin-bottom:8px;}
+    .box{background:linear-gradient(180deg,#ffffff,#f7fafa); border-radius:6px; border:1px solid var(--border); padding:8px; margin-bottom:8px;}
+    .hero{height:120px; display:flex; align-items:center; justify-content:center; color:var(--primary); font-weight:700; border-radius:8px;}
+    .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
+    .list-item{height:52px; display:flex; align-items:center; padding:8px; border-radius:6px; background:#FBFEFB; border:1px solid #EEF6EE;}
+
+    /* footer */
+    footer{font-size:13px; color:var(--muted); margin-top:8px; text-align:center;}
+
+    /* Accessibility helpers */
+    .kbd{background:#f3f7f3;border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px;color:var(--muted);}
+
+    /* Responsive tweaks */
+    @media (max-width:720px){
+      body{padding:18px;}
+      .wireframes{flex-direction:column;}
+      .grid{grid-template-columns:1fr;}
+    }
+
+    /* Footer grid (three columns side-by-side on wide screens) */
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid rgba(0,0,0,0.04);
+  color: #333;
+  padding: 1.25rem 0;
+  margin-top: 2rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Column styles */
+.footer-col p {
+  margin: 0 0 0.5rem 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.footer-col a {
+  color: var(--brand-teal-2);
+  text-decoration: none;
+}
+.footer-col a:hover,
+.footer-col a:focus { text-decoration: underline; }
+
+/* Small tweak: make the left column title bolder */
+.footer-grid .footer-col:first-child p:first-child {
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+/* Responsive: stack columns on small screens to avoid any horizontal scrolling */
+@media (max-width: 720px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    text-align: left;
+  }
+  .footer-col { padding-bottom: 0.4rem; border-bottom: 1px solid rgba(10,10,10,0.03); }
+  .footer-col:last-child { border-bottom: none; }
+}
+
+/* Extra: make sure footer links do not overflow */
+.site-footer a { word-break: break-word; }
