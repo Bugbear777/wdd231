@@ -291,6 +291,10 @@ h1#course-title {
   .card-meta { text-align:left; min-width: 0; }
   #memberContainer.grid-view { grid-template-columns: 1fr; }
 }
+.visitor-message{
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
 
 /* Discover grid */
 .discover-grid {
