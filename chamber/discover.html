@@ -12,8 +12,7 @@
 <link rel="stylesheet" href="styles/directory.css">
 
 <script src="scripts/getdates.js" defer></script>
-<script src="scripts/toggleviews.js" defer></script>
-<script src="scripts/viewmembers.js" defer></script>
+<script src="scripts/discover.js" defer></script>
 
   <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
   <meta name="author" content="Joseph Marlow">
@@ -45,17 +44,26 @@
           <li><a href="./index.html">Home</a></li>
           <li><a href="./directory.html">Directory</a></li>
           <li><a href="./join.html">Join</a></li>
-          <li><a href="./discover.html" class="active">Discovery</a></li>
+          <li><a href="./discover.html" class="active">Discover</a></li>
         </ul>
       </nav>
 
       <div class="header-meta">
-        <h1 id="course-title">Directory</h1>
+        <h1 id="course-title">Discovery</h1>
       </div>
     </div>
   </header>
 
- <main></main>
+  <main role="main" class="container">
+    <!-- Visitor message -->
+    <div id="visitorMessage" class="visitor-message" style="margin-bottom: 1rem; font-weight:600;"></div>
+
+    <!-- Discover grid -->
+    <section id="discoverGrid" class="discover-grid">
+      <!-- Cards will be generated dynamically from JSON -->
+    </section>
+  </main>
+
 
 
   <footer class="site-footer">

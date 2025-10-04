@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Desert Botanical Garden",
+    "address": "1201 N Galvin Pkwy, Phoenix, AZ 85008",
+    "description": "A beautiful desert garden with thousands of plant species.",
+    "image": "./images/desert-botanical.webp"
+  },
+  {
+    "name": "Papago Park",
+    "address": "625 N Galvin Pkwy, Phoenix, AZ 85008",
+    "description": "Iconic red rock formations and hiking trails.",
+    "image": "./images/papago-park.webp"
+  },
+  {
+    "name": "Heard Museum",
+    "address": "2301 N Central Ave, Phoenix, AZ 85004",
+    "description": "Explore Native American art and culture.",
+    "image": "./images/heard-museum.webp"
+  },
+  {
+    "name": "Camelback Mountain",
+    "address": "Phoenix, AZ 85016",
+    "description": "Popular hiking spot with panoramic city views.",
+    "image": "./images/camelback-mountain.webp"
+  },
+  {
+    "name": "Old Town Scottsdale",
+    "address": "Scottsdale, AZ 85251",
+    "description": "Historic district with shops, restaurants, and art galleries.",
+    "image": "./images/old-town-scottsdale.webp"
+  },
+  {
+    "name": "Arizona Science Center",
+    "address": "600 E Washington St, Phoenix, AZ 85004",
+    "description": "Hands-on science exhibits for all ages.",
+    "image": "./images/arizona-science-center.webp"
+  },
+  {
+    "name": "Phoenix Zoo",
+    "address": "455 N Galvin Pkwy, Phoenix, AZ 85008",
+    "description": "Large zoo with exotic animals and educational programs.",
+    "image": "./images/phoenix-zoo.webp"
+  },
+  {
+    "name": "Roosevelt Row",
+    "address": "Phoenix, AZ 85004",
+    "description": "Creative district with street art, galleries, and cafes.",
+    "image": "./images/roosevelt-row.webp"
+  }
+]
