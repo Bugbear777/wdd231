@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board Game Hub — Random Game Picker</title>
+
+  <meta name="description" content="WDD 231 – Web Frontend Development | Joseph Marlow | Explore the basics of semantic HTML, CSS layouts, and responsive design.">
+  <meta name="author" content="Joseph Marlow">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+  <script src="scripts/getdates.js" defer></script>
+
+
+  <link rel="icon" href="./images/favicon.ico">
+  <meta property="og:title" content="Random Game Picker">
+  <meta property="og:description" content="Random Game Picker of BoardGameHub">
+  <meta property="og:url" content="https://Bugbear777.github.io/wdd231/project/index.html">
+  <meta property="og:image" content="./images/boardgames.webp" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner container">
+      <button id="navToggle" class="nav-toggle" aria-controls="mainNav" aria-expanded="false" aria-label="Open navigation">
+        <span class="hamburger"></span>
+      </button>
+
+      <a class="header-logo" href="./index.html" title="Board Games Club">
+        <span class="site-title">Board Games Club</span>
+      </a>
+
+      <nav id="mainNav" class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./picker.html" class="active">Random Game Picker</a></li>
+          <li><a href="./finder.html">Game Finder</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-meta">
+        <h1 id="course-title">Random Game Picker</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+  </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid" role="contentinfo">
+            <div class="footer-col">
+                <p><strong>Board Game Hub</strong></p>
+                <p>523 S Kirchoff</p>
+                <p>Mesa, AZ 85203</p>
+                <p>membership@boardgamehub.com</p>
+                <p>(602) 555-5555</p>
+            </div>
+
+            <div class="footer-col">
+                <p><a href="https://github.com/Bugbear777/wdd231">Github</a></p>
+                <p><a href="https://www.linkedin.com/in/joseph-marlow-2959a3227">LinkedIn</a></p>
+                <p><a href="https://www.facebook.com/joseph.marlow.3532">Facebook</a></p>
+            </div>
+
+            <div class="footer-col">
+                <p>WDD231 Class Project</p>
+                <p>Joseph Marlow</p>
+                <p>&copy; <span id="currentyear"></span> Board Game Hub</p>
+                <p id="lastModified"></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

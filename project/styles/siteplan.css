@@ -8,6 +8,7 @@
       --text: #13342B;       /* main text color (dark green) */
       --card-bg: #FFFFFF;    /* white cards */
       --border: #E6EFE8;     /* subtle borders */
+      --max-width: 1100px;
     }
 
     /* Page layout & typography (follow Typography section) */
@@ -30,7 +31,188 @@
       margin-bottom:28px;
     }
 
-    .logo{
+    /* generic footer and nav menu styles */
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html,body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: #222;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height: 1.45;
+    font-size: 16px;
+    }
+
+    /* Prevent horizontal overflow from large images/content */
+    img, picture, video { max-width: 100%; display: block; }
+
+    /* Utility - sr-only for accessibility */
+    .sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+
+    /* Layout container */
+    .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.25rem;
+    }
+
+    /* Header */
+    .site-header {
+    background: var(--primary);
+    color: var(--accent);
+    }
+    .header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display:flex;
+    align-items:center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    }
+
+    h1#course-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text);
+    }
+
+    /* nav - desktop */
+    .main-nav ul { list-style:none; margin:0; padding:0; display:flex; gap: 1rem; align-items:center; }
+    .main-nav a {
+      display:inline-block;
+      padding: 0.45rem 0.6rem;
+      color: var(--text); text-decoration: none; border-radius: 6px;
+      font-weight:500;
+    }
+    .main-nav a:hover,
+    .main-nav a:focus { background: rgba(255,255,255,0.08); outline: none; }
+    .main-nav a.active { background: rgba(255,255,255,0.12); }
+
+    /* header meta (title) */
+    .header-meta { margin-left:auto; color: var(--primary); font-weight:600; font-size:0.95rem; }
+
+    /* nav toggle (mobile) */
+    .nav-toggle {
+      background: transparent;
+      border: 0;
+      display:none;
+      padding: 0.3rem;
+      margin-right: 0.25rem;
+    }
+    .nav-toggle .hamburger {
+      display:block;
+      width:28px;
+      height:2px;
+      background: #fff;
+      position: relative;
+    }
+    .nav-toggle .hamburger::before,
+    .nav-toggle .hamburger::after {
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      background:#fff;
+    }
+    .nav-toggle .hamburger::before { top:-8px; }
+    .nav-toggle .hamburger::after { top:8px; }
+
+    .site-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;        /* desktop default */
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    /* Responsive: mobile adjustments */
+    @media (max-width: 800px) {
+    .header-inner { padding: 0.65rem 0.9rem; }
+    .main-nav { position: absolute; left:0; right:0; top:64px; background: var(--primary); display:none; padding:0.8rem; }
+    .main-nav ul { flex-direction: column; gap: 0.25rem; }
+    .nav-toggle { display:inline-block; }
+
+    .container { padding: 0.9rem; }
+
+    .card-meta { min-width: 120px; }
+    }
+
+    /* When nav is expanded (via JS we add .open to header) */
+    .site-header.open .main-nav { display:block; }
+
+      
+    
+
+ 
+
+    /* Footer grid (three columns side-by-side on wide screens) */
+    .site-footer {
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.04);
+      color: #333;
+      padding: 1.25rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Column styles */
+    .footer-col p {
+      margin: 0 0 0.5rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .footer-col a {
+      color: var(--brand-teal-2);
+      text-decoration: none;
+    }
+    .footer-col a:hover,
+    .footer-col a:focus { text-decoration: underline; }
+
+    footer{font-size:13px; color:var(--muted); margin-top:8px; text-align:center;}
+
+    /* Small tweak: make the left column title bolder */
+    .footer-grid .footer-col:first-child p:first-child {
+      color: #111;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    /* Responsive: stack columns on small screens to avoid any horizontal scrolling */
+    @media (max-width: 720px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        text-align: left;
+      }
+      .footer-col { padding-bottom: 0.4rem; border-bottom: 1px solid rgba(10,10,10,0.03); }
+      .footer-col:last-child { border-bottom: none; }
+    }
+
+    /* Extra: make sure footer links do not overflow */
+    .site-footer a { word-break: break-word; }
+
+    /* site plan section */
+       .logo{
       width:72px;
       height:72px;
       border-radius:12px;
@@ -48,7 +230,7 @@
     h1{font-family:"Playfair Display",serif; font-weight:700; color:var(--primary); margin:0; font-size:28px;}
     p.lead{margin:6px 0 0; color:var(--muted); font-size:14px;}
 
-    main{max-width:980px; margin:0 auto;}
+    siteplan-main {max-width:980px; margin:0 auto;}
 
     section{background:var(--card-bg); border-radius:10px; padding:18px; margin-bottom:18px; border:1px solid var(--border); box-shadow:0 6px 14px rgba(19,52,43,0.04);}
 
@@ -79,8 +261,7 @@
     .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px;}
     .list-item{height:52px; display:flex; align-items:center; padding:8px; border-radius:6px; background:#FBFEFB; border:1px solid #EEF6EE;}
 
-    /* footer */
-    footer{font-size:13px; color:var(--muted); margin-top:8px; text-align:center;}
+    
 
     /* Accessibility helpers */
     .kbd{background:#f3f7f3;border:1px solid var(--border);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px;color:var(--muted);}
@@ -92,55 +273,27 @@
       .grid{grid-template-columns:1fr;}
     }
 
-    /* Footer grid (three columns side-by-side on wide screens) */
-.site-footer {
-  background: #ffffff;
-  border-top: 1px solid rgba(0,0,0,0.04);
-  color: #333;
-  padding: 1.25rem 0;
-  margin-top: 2rem;
-}
+    /*Home Page Section*/
+    /* HERO */
+    .hero { position: relative; width: 100%; overflow: hidden; }
+    .hero-media img {
+      width: 100%;
+      height: 44vh;           /* adjust to taste */
+      max-height: 560px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 1.5rem;
+      color: white;
+      text-shadow: 0 6px 18px rgba(8,10,14,0.4);
+    }
+    .hero-overlay h1 { font-size: 2.2rem; margin: 0 0 0.4rem 0; color: #fff; }
+    .hero-overlay .lead { margin: 0 0 1rem 0; font-size: 1.05rem; color: #f7f9fb; }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  align-items: start;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1.25rem;
-}
-
-/* Column styles */
-.footer-col p {
-  margin: 0 0 0.5rem 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-.footer-col a {
-  color: var(--brand-teal-2);
-  text-decoration: none;
-}
-.footer-col a:hover,
-.footer-col a:focus { text-decoration: underline; }
-
-/* Small tweak: make the left column title bolder */
-.footer-grid .footer-col:first-child p:first-child {
-  color: #111;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-}
-
-/* Responsive: stack columns on small screens to avoid any horizontal scrolling */
-@media (max-width: 720px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-    text-align: left;
-  }
-  .footer-col { padding-bottom: 0.4rem; border-bottom: 1px solid rgba(10,10,10,0.03); }
-  .footer-col:last-child { border-bottom: none; }
-}
-
-/* Extra: make sure footer links do not overflow */
-.site-footer a { word-break: break-word; }
+    /* Simple button styles if not present */
+    .btn { display:inline-block; padding:0.5rem 0.85rem; border-radius:8px; text-decoration:none; background:transparent; border:1px solid rgba(255,255,255,0.18); color: #fff; font-weight:700; }
+    .btn-primary { background: var(--accent-gold); color: #2c1500; border: none; }

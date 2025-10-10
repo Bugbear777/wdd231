@@ -1,0 +1,134 @@
+[
+  {
+    "id": "catan",
+    "title": "Catan",
+    "maker": "Kosmos",
+    "player_count": "3–4",
+    "playtime": "60–120 min",
+    "difficulty": 2,
+    "genres": ["Strategy", "Trading", "Resource Management"],
+    "description": "Build settlements, trade resources, and vie for control of the island of Catan.",
+    "image": "images/games/catan.webp"
+  },
+  {
+    "id": "ticket-to-ride",
+    "title": "Ticket to Ride",
+    "maker": "Days of Wonder",
+    "player_count": "2–5",
+    "playtime": "45–75 min",
+    "difficulty": 1,
+    "genres": ["Family", "Route Building", "Set Collection"],
+    "description": "Collect train cards and claim railway routes across North America.",
+    "image": "images/games/ticket_to_ride.webp"
+  },
+  {
+    "id": "pandemic",
+    "title": "Pandemic",
+    "maker": "Z-Man Games",
+    "player_count": "2–4",
+    "playtime": "45–60 min",
+    "difficulty": 2,
+    "genres": ["Cooperative", "Strategy"],
+    "description": "Work together as a team of specialists to contain global outbreaks and find cures in time.",
+    "image": "images/games/pandemic.webp"
+  },
+  {
+    "id": "carcassonne",
+    "title": "Carcassonne",
+    "maker": "Hans im Glück",
+    "player_count": "2–5",
+    "playtime": "30–45 min",
+    "difficulty": 1,
+    "genres": ["Tile Placement", "Territory Building"],
+    "description": "Draw and place tiles to build medieval landscapes and score points with your followers.",
+    "image": "images/games/carcassonne.webp"
+  },
+  {
+    "id": "azul",
+    "title": "Azul",
+    "maker": "Next Move Games",
+    "player_count": "2–4",
+    "playtime": "30–45 min",
+    "difficulty": 1,
+    "genres": ["Abstract", "Tile Placement"],
+    "description": "Draft colorful tiles to complete patterns and adorn the walls of the Royal Palace of Evora.",
+    "image": "images/games/azul.webp"
+  },
+  {
+    "id": "wingspan",
+    "title": "Wingspan",
+    "maker": "Stonemaier Games",
+    "player_count": "1–5",
+    "playtime": "40–70 min",
+    "difficulty": 2,
+    "genres": ["Engine Building", "Card Drafting", "Nature"],
+    "description": "Attract birds to your wildlife preserves and build a powerful engine from diverse species.",
+    "image": "images/games/wingspan.webp"
+  },
+  {
+    "id": "root",
+    "title": "Root",
+    "maker": "Leder Games",
+    "player_count": "2–4",
+    "playtime": "60–90 min",
+    "difficulty": 3,
+    "genres": ["Asymmetric", "Warfare", "Strategy"],
+    "description": "Lead one of the woodland factions vying for control of a vast and colorful forest.",
+    "image": "images/games/root.webp"
+  },
+  {
+    "id": "7-wonders",
+    "title": "7 Wonders",
+    "maker": "Repos Production",
+    "player_count": "3–7",
+    "playtime": "30–40 min",
+    "difficulty": 2,
+    "genres": ["Card Drafting", "Civilization", "Set Collection"],
+    "description": "Develop your civilization by drafting cards to build wonders, trade, and achieve supremacy.",
+    "image": "images/games/7wonders.webp"
+  },
+  {
+    "id": "splendor",
+    "title": "Splendor",
+    "maker": "Space Cowboys",
+    "player_count": "2–4",
+    "playtime": "30 min",
+    "difficulty": 1,
+    "genres": ["Card Drafting", "Economic", "Family"],
+    "description": "Acquire gems and cards to build prestige and attract noble patrons.",
+    "image": "images/games/splendor.webp"
+  },
+  {
+    "id": "clue",
+    "title": "Clue",
+    "maker": "Hasbro",
+    "player_count": "3–6",
+    "playtime": "45–60 min",
+    "difficulty": 1,
+    "genres": ["Mystery", "Deduction", "Family"],
+    "description": "Solve the murder mystery by deducing the correct suspect, weapon, and location.",
+    "image": "images/games/clue.webp"
+  },
+  {
+    "id": "monopoly",
+    "title": "Monopoly",
+    "maker": "Hasbro",
+    "player_count": "2–6",
+    "playtime": "60–120 min",
+    "difficulty": 1,
+    "genres": ["Economic", "Family", "Strategy"],
+    "description": "Buy, trade, and develop properties to bankrupt your opponents in this classic game of capitalism.",
+    "image": "images/games/monopoly.webp"
+  },
+  {
+    "id": "uno",
+    "title": "UNO",
+    "maker": "Mattel",
+    "player_count": "2–10",
+    "playtime": "20–30 min",
+    "difficulty": 1,
+    "genres": ["Card Game", "Family", "Party"],
+    "description": "Match colors and numbers to be the first to get rid of all your cards.",
+    "image": "images/games/uno.webp"
+  }
+]
