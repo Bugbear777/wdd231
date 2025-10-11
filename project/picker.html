@@ -45,6 +45,48 @@
   </header>
 
   <main>
+    <main>
+  <section class="picker">
+    <h1 class="picker-title">Random Game Picker</h1>
+    <p class="picker-sub">Click spin to let fate choose your next board game.</p>
+
+    <div class="wheel-wrap" aria-live="polite">
+      <!-- Pointer -->
+      <div class="wheel-pointer" aria-hidden="true"></div>
+
+      <!-- Spinner wheel -->
+      <div id="wheel" class="wheel" role="img" aria-label="Random spinner with five colored segments"></div>
+    </div>
+
+    <div class="picker-actions">
+      <button id="spinBtn" class="btn-primary picker-btn" type="button" aria-describedby="spinNote">
+        Spin to Play
+      </button>
+      <span id="spinNote" class="picker-note">Spinner is just for show—result is truly random.</span>
+    </div>
+
+    <p id="spinStatus" class="picker-status" role="status" aria-live="polite"></p>
+  </section>
+
+  <!-- Modal (reuses your modal pattern/IDs so it matches Finder) -->
+  <div id="gameModal" class="modal" hidden aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal">&times;</button>
+      <h2 id="modalTitle"></h2>
+      <img id="modalImage" src="" alt="" />
+      <p id="modalMaker"></p>
+      <p id="modalPlayers"></p>
+      <p id="modalPlaytime"></p>
+      <p id="modalDifficulty"></p>
+      <p id="modalGenres"></p>
+      <p id="modalDescription"></p>
+    </div>
+  </div>
+</main>
+
+<!-- After your existing getdates.js include, add: -->
+<script src="scripts/picker.js" defer></script>
+
   </main>
 
     <footer class="site-footer">

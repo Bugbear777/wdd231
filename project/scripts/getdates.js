@@ -4,27 +4,6 @@ document.getElementById("currentyear").textContent = new Date().getFullYear();
 // Dynamically display last modified date
 document.getElementById("lastModified").textContent = "Last Modified: " + document.lastModified;
 
-//Navigation scripts
-document.addEventListener("DOMContentLoaded", () => {
-  const navToggle = document.getElementById("navToggle");
-  const siteHeader = document.querySelector(".site-header");
-  const mainNav = document.getElementById("mainNav");
-  if (!navToggle || !siteHeader || !mainNav) return;
-
-  navToggle.addEventListener("click", () => {
-    const isOpen = siteHeader.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-
-    // move focus into the nav for keyboard users when opening
-    if (isOpen) {
-      const firstLink = mainNav.querySelector("a");
-      if (firstLink) firstLink.focus();
-    } else {
-      navToggle.focus(); // return focus to toggle when closing
-    }
-  });
-});
-
 // view-toggle.js
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('gamesContainer');
@@ -286,12 +265,6 @@ listBtn?.addEventListener('click', () => setView('list-view'));
     }
   });
 
-  // Mobile nav toggle (if present)
-  navToggle && navToggle.addEventListener('click', () => {
-    const open = header.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
   // Init view from storage
   try {
     const saved = localStorage.getItem('directoryView');
@@ -546,4 +519,96 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Mobile nav toggle — delegated + header-scoped, no prechecks
+document.addEventListener('DOMContentLoaded', () => {
+  // Toggle when the hamburger is clicked (works even if button wasn't found at load)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.nav-toggle');   // class-based, not ID-based
+    if (!btn) return;
+
+    const header = btn.closest('.site-header');
+    if (!header) return;
+
+    const nav = header.querySelector('.main-nav'); // class-based lookup
+    if (!nav) return;
+
+    const isOpen = header.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+    if (isOpen) {
+      nav.querySelector('a')?.focus();
+    } else {
+      btn.focus();
+    }
+  }, true); // capture = true helps even if something stops propagation later
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const header = document.querySelector('.site-header.open');
+    if (!header) return;
+    const btn = header.querySelector('.nav-toggle');
+    header.classList.remove('open');
+    btn?.setAttribute('aria-expanded', 'false');
+    btn?.focus();
+  });
+
+  // Close when resizing up to desktop
+  const mq = window.matchMedia('(min-width: 801px)');
+  const closeIfDesktop = () => {
+    if (!mq.matches) return;
+    const header = document.querySelector('.site-header.open');
+    const btn = header?.querySelector('.nav-toggle');
+    if (header && btn) {
+      header.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  };
+  mq.addEventListener?.('change', closeIfDesktop);
+  mq.addListener?.(closeIfDesktop); // legacy Safari
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.site-header.open');
+  const btn = header?.querySelector('.nav-toggle');
+  if (header && btn) {
+    header.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const closeHeader = () => {
+    const header = document.querySelector('.site-header.open');
+    const btn = header?.querySelector('.nav-toggle');
+    if (header) header.classList.remove('open');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  };
+
+  // Close if navigating away and when coming back from bfcache
+  window.addEventListener('pagehide', closeHeader);
+  window.addEventListener('pageshow', closeHeader);
+
+  // Close when a nav link is clicked (so next page never starts "open")
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.main-nav a');
+    if (link) closeHeader();
+  }, true);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.documentElement;
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  const setHeaderHeight = () => {
+    const h = Math.ceil(header.getBoundingClientRect().height);
+    root.style.setProperty('--header-height', h + 'px');
+  };
+
+  // Run at start and when things change size
+  setHeaderHeight();
+  const ro = new ResizeObserver(setHeaderHeight);
+  ro.observe(header);
+  window.addEventListener('orientationchange', setHeaderHeight);
+});
 

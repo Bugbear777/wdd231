@@ -79,20 +79,81 @@ main{
     position: absolute;
     left: 0;
     right: 0;
-    top: 64px;
+    top: 64px;                 /* adjust if your header is taller/shorter */
+    display: none;             /* hidden by default */
     background: var(--primary);
-    display: none; /* hidden by default on mobile */
     padding: 0.8rem 1rem;
+    z-index: 999;              /* sits above page content */
   }
 
-  /* show when header has .open */
   .site-header.open .main-nav {
-    display: block;
+    display: block;            /* revealed when header has .open */
   }
 
   .main-nav ul { flex-direction: column; gap: 0.5rem; }
   .nav-toggle { display: inline-block; }
 }
+/* ==== Global mobile polish ==== */
+@media (max-width: 800px) {
+  .container { padding: 0 .9rem; }
+  main { padding: 12px 0; }
+
+  /* Ensure content isn't hidden under sticky header */
+  body { scroll-padding-top: var(--header-height, 64px); }
+}
+
+/* Make sure page content isn't covered if header height changes */
+main { margin-top: var(--header-height, 0px); }
+
+/* Picker layout on small screens */
+@media (max-width: 600px) {
+  .wheel-wrap { width: min(340px, 90vw); }
+  .picker-actions { flex-direction: column; align-items: stretch; gap: .5rem; }
+  .picker-note { text-align: center; }
+}
+
+/* Home cards side-by-side -> stacked */
+@media (max-width: 900px) {
+  .home-main { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+/* Finder tweaks */
+@media (max-width: 720px) {
+  .controls { gap: .6rem; }
+  .search-wrap input { min-width: 0; width: 100%; }
+  #gamesContainer.grid-view { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  #gamesContainer.list-view .game-thumb { width: 72px; height: 72px; }
+  .card-meta { min-width: auto; align-items: flex-start; text-align: left; }
+}
+
+/* Make sure the mobile menu shows/ hides correctly and sits on top */
+@media (max-width: 800px) {
+  .main-nav {
+    position: absolute;
+    left: 0; right: 0; top: var(--header-height, 64px);
+    display: none;
+    background: var(--primary);
+    padding: .8rem 1rem;
+    z-index: 999;                 /* under the toggle, over the page */
+  }
+  .site-header.open .main-nav { display: block; }
+  .nav-toggle { position: relative; z-index: 1001; }
+}
+
+/* Optional: lock page scroll when menu is open (prevents scroll-jank) */
+@media (max-width: 800px) {
+  .site-header.open ~ main { pointer-events: none; }
+  .site-header.open ~ main, 
+  .site-header.open ~ .site-footer { filter: saturate(.9) brightness(.96); }
+}
+
+
+/* header should sit above content */
+.site-header { position: sticky; top: 0; z-index: 1000; }
+
+/* Optional: make sure the button can be clicked above the nav */
+.nav-toggle { position: relative; z-index: 1001; }
+
 
 .header-meta {
   flex-grow: 1;        /* expands to fill remaining space */
@@ -473,3 +534,83 @@ section h2{color:var(--primary); margin-top:0; font-family:"Playfair Display",se
   word-break: break-word;
 }
 
+/*Random Picker Page*/
+/* ===== Random Picker ===== */
+.picker {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.picker-title { margin: 0 0 .25rem; font-family: "Playfair Display", serif; color: var(--primary); }
+.picker-sub { margin: 0 0 1rem; color: var(--muted); }
+
+.wheel-wrap {
+  position: relative;
+  width: min(440px, 80vw);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1rem;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08), inset 0 0 0 2px rgba(0,0,0,.06);
+  /* 5 colored wedges (purely visual) */
+  background:
+    conic-gradient(
+      #F94144 0 20%,
+      #F3722C 20% 40%,
+      #F9C74F 40% 60%,
+      #90BE6D 60% 80%,
+      #577590 80% 100%
+    );
+  /* rotation controlled via CSS var */
+  --spin: 0deg;
+  transform: rotate(var(--spin));
+  transition: transform 2.5s cubic-bezier(.2,.8,.2,1);
+}
+
+/* top pointer */
+.wheel-pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 18px solid #2c1500;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.2));
+  z-index: 2;
+}
+
+.picker-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
+.picker-btn {
+  padding: .65rem 1.1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.picker-note { color: var(--muted); font-size: .9rem; }
+.picker-status { text-align: center; color: var(--muted); min-height: 1.2rem; }
+
+/* Small modal tweaks for nice spacing on picker */
+#gameModal .modal-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: .5rem 0 .25rem;
+}
