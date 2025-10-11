@@ -28,44 +28,37 @@ document.addEventListener("DOMContentLoaded", () => {
 // view-toggle.js
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('gamesContainer');
-  const gridBtn = document.getElementById('gridViewBtn');
-  const listBtn = document.getElementById('listViewBtn');
+  const gridBtn   = document.getElementById('gridViewBtn');
+  const listBtn   = document.getElementById('listViewBtn');
+  const toolbar   = document.querySelector('.view-toggle');
 
-  // helper to set view and ARIA states
+  // If this page doesn't have the view UI, skip initializing this feature.
+  if (!(container && gridBtn && listBtn && toolbar)) return;
+
   function setView(mode) {
     container.classList.remove('grid-view', 'list-view');
     container.classList.add(mode);
-
-    // update aria-pressed on buttons
     gridBtn.setAttribute('aria-pressed', mode === 'grid-view' ? 'true' : 'false');
     listBtn.setAttribute('aria-pressed', mode === 'list-view' ? 'true' : 'false');
-
-    // save preference
-    try { localStorage.setItem('directoryView', mode); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('directoryView', mode); } catch {}
   }
 
-  // event listeners
   gridBtn.addEventListener('click', () => setView('grid-view'));
   listBtn.addEventListener('click', () => setView('list-view'));
 
-  // keyboard support: allow left/right arrow to toggle while focus is in toolbar
-  const toolbar = document.querySelector('.view-toggle');
   toolbar.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
       e.preventDefault();
       const mode = gridBtn.getAttribute('aria-pressed') === 'true' ? 'list-view' : 'grid-view';
       setView(mode);
-      // move focus to the active button
-      if (mode === 'grid-view') gridBtn.focus(); else listBtn.focus();
+      (mode === 'grid-view' ? gridBtn : listBtn).focus();
     }
   });
 
-  // initialize from saved preference or default to grid
-  const saved = (function () {
-    try { return localStorage.getItem('directoryView'); } catch (e) { return null; }
-  })();
+  const saved = (() => { try { return localStorage.getItem('directoryView'); } catch { return null; } })();
   setView(saved === 'list-view' ? 'list-view' : 'grid-view');
 });
+
 
 // view-games.js
 document.addEventListener('DOMContentLoaded', () => {
@@ -246,15 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // View toggle
-  function setView(mode) {
-    container.classList.remove('grid-view', 'list-view');
-    container.classList.add(mode);
-    gridBtn.setAttribute('aria-pressed', mode === 'grid-view' ? 'true' : 'false');
-    listBtn.setAttribute('aria-pressed', mode === 'list-view' ? 'true' : 'false');
-    try { localStorage.setItem('directoryView', mode); } catch (e) {}
-  }
-  gridBtn.addEventListener('click', () => setView('grid-view'));
-  listBtn.addEventListener('click', () => setView('list-view'));
+  // If this page doesn't host the games UI, bail early
+if (!container) return;
+
+// View toggle (only wire if buttons exist)
+function setView(mode) {
+  container.classList.remove('grid-view', 'list-view');
+  container.classList.add(mode);
+  gridBtn?.setAttribute('aria-pressed', mode === 'grid-view' ? 'true' : 'false');
+  listBtn?.setAttribute('aria-pressed', mode === 'list-view' ? 'true' : 'false');
+  try { localStorage.setItem('directoryView', mode); } catch (e) {}
+}
+gridBtn?.addEventListener('click', () => setView('grid-view'));
+listBtn?.addEventListener('click', () => setView('list-view'));
+
 
   // Search
   function doSearch(q) {
@@ -302,6 +300,250 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setView(viewMode);
   loadGames();
+});
+// --- Game of the Week (homepage) ---
+document.addEventListener('DOMContentLoaded', () => {
+  const wrap      = document.getElementById('gameOfTheWeek');
+  if (!wrap) return; // homepage-only
+
+  const card      = document.getElementById('gotwCard');
+  const empty     = document.getElementById('gotwEmpty');
+  const imgEl     = document.getElementById('gotwImage');
+  const nameEl    = document.getElementById('gotwName');
+  const metaEl    = document.getElementById('gotwMeta');
+  const descEl    = document.getElementById('gotwDesc');
+  const learnBtn  = document.getElementById('gotwLearnMore');
+
+  // Optional: if your modal exists on the homepage too
+  const modal            = document.getElementById('gameModal');
+  const modalClose       = modal?.querySelector('.modal-close');
+  const modalTitle       = modal?.querySelector('#modalTitle');
+  const modalImage       = modal?.querySelector('#modalImage');
+  const modalMaker       = modal?.querySelector('#modalMaker');
+  const modalPlayers     = modal?.querySelector('#modalPlayers');
+  const modalPlaytime    = modal?.querySelector('#modalPlaytime');
+  const modalDifficulty  = modal?.querySelector('#modalDifficulty');
+  const modalGenres      = modal?.querySelector('#modalGenres');
+  const modalDescription = modal?.querySelector('#modalDescription');
+
+  function difficultyBadge(level) {
+    if (level === 3) return { cls: 'gold',   text: 'Hard' };
+    if (level === 2) return { cls: 'silver', text: 'Medium' };
+    return { cls: 'bronze', text: 'Easy' };
+  }
+
+  function weekKey(d = new Date()) {
+    // ISO week number for deterministic rotation
+    const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const dayNum = (date.getUTCDay() || 7);
+    date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(),0,1));
+    const weekNo = Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+    return `${date.getUTCFullYear()}-W${String(weekNo).padStart(2,'0')}`;
+  }
+
+  function pickGameOfWeek(list) {
+    if (!Array.isArray(list) || list.length === 0) return null;
+
+    // Optional manual override: localStorage.setItem('gotwId', '<id>')
+    const overrideId = (() => { try { return localStorage.getItem('gotwId'); } catch { return null; } })();
+    if (overrideId) {
+      const found = list.find(g => g.id === overrideId);
+      if (found) return found;
+    }
+
+    // Deterministic rotation by week
+    const key = weekKey(); // e.g., "2025-W41"
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) hash = ((hash << 5) - hash) + key.charCodeAt(i) | 0;
+    const idx = Math.abs(hash) % list.length;
+    return list[idx];
+  }
+
+  function openModal(game) {
+    if (!modal) return; // no modal on this page
+    modalTitle.textContent = game.title;
+    modalImage.src = game.image || './images/game-placeholder.jpg';
+    modalImage.alt = game.title;
+    modalMaker.textContent = `Maker: ${game.maker}`;
+    modalPlayers.textContent = `Players: ${game.player_count}`;
+    modalPlaytime.textContent = `Playtime: ${game.playtime}`;
+    modalDifficulty.textContent = `Difficulty: ${difficultyBadge(game.difficulty).text}`;
+    modalGenres.textContent = `Genres: ${game.genres.join(', ')}`;
+    modalDescription.textContent = game.description;
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  modalClose?.addEventListener('click', () => {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+  });
+  modal?.addEventListener('click', (e) => { if (e.target === modal) { modal.hidden = true; modal.setAttribute('aria-hidden', 'true'); }});
+  document.addEventListener('keydown', (e) => { if (modal && !modal.hidden && e.key === 'Escape') { modal.hidden = true; modal.setAttribute('aria-hidden', 'true'); }});
+
+  async function loadGOTW() {
+    try {
+      const res = await fetch('data/games.json')  // ← adjust if your homepage isn’t at repo root
+      // If your homepage is inside /project/, use 'data/games.json' instead.
+      // If your homepage is at root and games.json is /project/data, keep as written.
+      ;
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      const game = pickGameOfWeek(data);
+      if (!game) {
+        empty.hidden = false;
+        return;
+      }
+
+      // Populate UI
+      imgEl.src = game.image || './images/game-placeholder.jpg';
+      imgEl.alt = game.title;
+      nameEl.textContent = game.title;
+      metaEl.textContent = `${game.maker} • ${game.player_count} • ${game.playtime}`;
+      descEl.textContent = game.description;
+
+      learnBtn.onclick = () => openModal(game);
+
+      card.hidden = false;
+      empty.hidden = true;
+    } catch (err) {
+      console.error('GOTW load failed:', err);
+      empty.hidden = false;
+      empty.textContent = 'Unable to load featured game.';
+    }
+  }
+
+  loadGOTW();
+});
+
+// --- Suggest a Game form ---
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('suggestForm');
+  if (!form) return; // homepage-only
+
+  const statusEl   = document.getElementById('sgStatus');
+  const previewWrap= document.getElementById('sgPreviewWrap');
+  const previewEl  = document.getElementById('sgPreview');
+  const copyBtn    = document.getElementById('sgCopy');
+  const clearBtn   = document.getElementById('sgClear');
+
+  // Inputs
+  const titleEl = document.getElementById('sgTitle');
+  const makerEl = document.getElementById('sgMaker');
+  const playersEl = document.getElementById('sgPlayers');
+  const playtimeEl = document.getElementById('sgPlaytime');
+  const difficultyEl = document.getElementById('sgDifficulty');
+  const genresEl = document.getElementById('sgGenres');
+  const descEl = document.getElementById('sgDescription');
+  const imageEl = document.getElementById('sgImage');
+
+  // Load draft from localStorage
+  try {
+    const draft = JSON.parse(localStorage.getItem('sgDraft') || 'null');
+    if (draft) {
+      titleEl.value = draft.title || '';
+      makerEl.value = draft.maker || '';
+      playersEl.value = draft.player_count || '';
+      playtimeEl.value = draft.playtime || '';
+      difficultyEl.value = draft.difficulty || '';
+      genresEl.value = (draft.genres || []).join(', ');
+      descEl.value = draft.description || '';
+      imageEl.value = draft.image || '';
+    }
+  } catch {}
+
+  function setStatus(msg, isError=false) {
+    statusEl.textContent = msg || '';
+    statusEl.style.color = isError ? '#b00020' : '#666';
+  }
+
+  function toId(str) {
+    return String(str || '')
+      .toLowerCase()
+      .replace(/&/g, 'and')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+  }
+
+  function normalizeGenres(text) {
+    return text
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+  }
+
+  function buildObject() {
+    const title = titleEl.value.trim();
+    const maker = makerEl.value.trim();
+    const player_count = playersEl.value.trim();
+    const playtime = playtimeEl.value.trim();
+    const difficulty = Number(difficultyEl.value || 0);
+    const genres = normalizeGenres(genresEl.value);
+    const description = descEl.value.trim();
+    const image = imageEl.value.trim();
+
+    // Required checks
+    if (!title || !maker || !player_count || !playtime || !difficulty || !genres.length || !description) {
+      throw new Error('Please complete all required fields.');
+    }
+    if (![1,2,3].includes(difficulty)) {
+      throw new Error('Difficulty must be 1 (Easy), 2 (Medium), or 3 (Hard).');
+    }
+
+    const obj = {
+      id: toId(title),
+      title,
+      maker,
+      player_count,
+      playtime,
+      difficulty,          // integer 1..3 to match your JSON
+      genres,
+      description,
+      image
+    };
+
+    // Save draft
+    try { localStorage.setItem('sgDraft', JSON.stringify(obj)); } catch {}
+
+    return obj;
+  }
+
+  function showPreview(obj) {
+    previewEl.textContent = JSON.stringify(obj, null, 2);
+    previewWrap.hidden = false;
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    try {
+      setStatus('Generating JSON…');
+      const obj = buildObject();
+      showPreview(obj);
+      setStatus('JSON ready. Click “Copy JSON” to copy, then paste into data/games.json.');
+    } catch (err) {
+      setStatus(err.message || 'Please fix the errors and try again.', true);
+      previewWrap.hidden = true;
+    }
+  });
+
+  copyBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(previewEl.textContent);
+      setStatus('Copied to clipboard. Thank you!');
+    } catch {
+      setStatus('Unable to copy. Select the text and copy manually.', true);
+    }
+  });
+
+  clearBtn?.addEventListener('click', () => {
+    form.reset();
+    previewWrap.hidden = true;
+    setStatus('');
+    try { localStorage.removeItem('sgDraft'); } catch {}
+  });
 });
 
 

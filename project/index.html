@@ -56,21 +56,99 @@
         </div>
       </div>
     </section>
-    <section id="conventions" class="container" aria-labelledby="conventions-heading" style="margin-top:18px;">
-      <h2 id="conventions-heading">Find gaming conventions near a place</h2>
+    <section class="home-main">
+      <div class="home-left">
+        <section id="gameOfTheWeek" class="gotw" aria-labelledby="gotwTitle">
+          <h2 id="gotwTitle">Game of the Week</h2>
+          <div class="gotw-card" id="gotwCard" hidden>
+            <img id="gotwImage" src="" alt="" />
+            <div class="gotw-main">
+              <h3 id="gotwName"></h3>
+              <p id="gotwMeta" class="gotw-meta"></p>
+              <p id="gotwDesc" class="gotw-desc"></p>
+              <div class="gotw-actions">
+                <button id="gotwLearnMore" type="button" class="learn-more-btn">Learn More</button>
+                <a href="./finder.html" class="gotw-link">Browse all games</a>
+              </div>
+            </div>
+          </div>
+          <p class="gotw-empty" id="gotwEmpty" hidden>No featured game available right now.</p>
+        </section>
+      </div>
+      <div class="home-right">
+        <section id="suggestGame" class="suggest">
+          <h2>Suggest a Game</h2>
+          <p class="suggest-sub">Know a great tabletop game we’re missing? Send it in!</p>
 
-      <form id="geoForm" aria-label="Search conventions" class="geo-form" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
-        <label for="geoQuery" class="sr-only">Search location</label>
-        <input id="geoQuery" type="search" placeholder="City, state or country (e.g. Phoenix, AZ)" required
-          style="flex:1;min-width:200px;padding:10px;border-radius:8px;border:1px solid var(--border);" />
+          <form id="suggestForm" novalidate>
+            <div class="field">
+              <label for="sgTitle">Title <span aria-hidden="true">*</span></label>
+              <input id="sgTitle" name="title" type="text" required maxlength="100" />
+              <small class="hint">e.g., Cascadia</small>
+            </div>
 
-        <button id="geoSearchBtn" class="btn btn-primary" type="submit" style="padding:10px 14px;">Search</button>
-        <button id="geoUseMyLocation" class="btn" type="button" style="padding:10px 14px;border-color:rgba(0,0,0,0.06);">Use my location</button>
-      </form>
+            <div class="field">
+              <label for="sgMaker">Maker / Publisher <span aria-hidden="true">*</span></label>
+              <input id="sgMaker" name="maker" type="text" required maxlength="100" />
+              <small class="hint">e.g., Flatout Games</small>
+            </div>
 
-      <div id="geoStatus" aria-live="polite" style="margin-top:10px;color:var(--muted);"></div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="sgPlayers">Player Count <span aria-hidden="true">*</span></label>
+                <input id="sgPlayers" name="player_count" type="text" required placeholder="e.g., 1–4" />
+                <small class="hint">Use en dash: 1–4</small>
+              </div>
 
-      <div id="geoResults" style="margin-top:12px;"></div>
+              <div class="field">
+                <label for="sgPlaytime">Playtime <span aria-hidden="true">*</span></label>
+                <input id="sgPlaytime" name="playtime" type="text" required placeholder="e.g., 30–45 min" />
+                <small class="hint">Include “min”</small>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="sgDifficulty">Difficulty <span aria-hidden="true">*</span></label>
+              <select id="sgDifficulty" name="difficulty" required>
+                <option value="">Select one…</option>
+                <option value="1">Easy (Bronze)</option>
+                <option value="2">Medium (Silver)</option>
+                <option value="3">Hard (Gold)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="sgGenres">Genres <span aria-hidden="true">*</span></label>
+              <input id="sgGenres" name="genres" type="text" required placeholder="e.g., Family, Tile Placement" />
+              <small class="hint">Comma-separated list</small>
+            </div>
+
+            <div class="field">
+              <label for="sgDescription">Description <span aria-hidden="true">*</span></label>
+              <textarea id="sgDescription" name="description" required rows="4" maxlength="500"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="sgImage">Image URL</label>
+              <input id="sgImage" name="image" type="url" placeholder="https://example.com/cover.webp" />
+              <small class="hint">Optional but helpful</small>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn-primary">Generate JSON</button>
+              <button type="button" id="sgClear" class="btn-ghost">Clear</button>
+            </div>
+
+            <div id="sgStatus" class="status" role="status" aria-live="polite"></div>
+
+            <div id="sgPreviewWrap" class="preview" hidden>
+              <h3>JSON Preview</h3>
+              <pre id="sgPreview" class="code"></pre>
+              <button type="button" id="sgCopy" class="btn-secondary">Copy JSON</button>
+            </div>
+          </form>
+        </section>
+      </div>
     </section>
   </main>
 
