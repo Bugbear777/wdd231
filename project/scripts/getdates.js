@@ -77,28 +77,85 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const header = document.querySelector('.site-header');
 
+  // Modal elements
+  const modal = document.getElementById('gameModal');
+  const modalClose = modal ? modal.querySelector('.modal-close') : null;
+  const modalTitle = modal ? modal.querySelector('#modalTitle') : null;
+  const modalImage = modal ? modal.querySelector('#modalImage') : null;
+  const modalMaker = modal ? modal.querySelector('#modalMaker') : null;
+  const modalPlayers = modal ? modal.querySelector('#modalPlayers') : null;
+  const modalPlaytime = modal ? modal.querySelector('#modalPlaytime') : null;
+  const modalDifficulty = modal ? modal.querySelector('#modalDifficulty') : null;
+  const modalGenres = modal ? modal.querySelector('#modalGenres') : null;
+  const modalDescription = modal ? modal.querySelector('#modalDescription') : null;
+
+  let lastFocusedEl = null;
+
   let games = [];
   let filtered = [];
   let viewMode = 'grid-view';
 
-  // Difficulty badge mapping
+  // Difficulty badge mapping (bronze/silver/gold to match CSS)
   function difficultyBadge(level) {
-    if (level >= 3) return { cls: 'gold', text: 'Hard' };
-    if (level >= 2) return { cls: 'silver', text: 'Medium' };
-    return { cls: 'game', text: 'Easy' };
+    if (level === 3) return { cls: 'gold', text: 'Hard' };
+    if (level === 2) return { cls: 'silver', text: 'Medium' };
+    return { cls: 'bronze', text: 'Easy' };
   }
+
+  // Open/Close modal (with Escape + basic focus return)
+  function openModal(game) {
+    if (!modal) return;
+    lastFocusedEl = document.activeElement;
+
+    modalTitle.textContent = game.title;
+    modalImage.src = game.image || './images/game-placeholder.jpg';
+    modalImage.alt = game.title;
+    modalMaker.textContent = `Maker: ${game.maker}`;
+    modalPlayers.textContent = `Players: ${game.player_count}`;
+    modalPlaytime.textContent = `Playtime: ${game.playtime}`;
+    modalDifficulty.textContent = `Difficulty: ${difficultyBadge(game.difficulty).text}`;
+    modalGenres.textContent = `Genres: ${game.genres.join(', ')}`;
+    modalDescription.textContent = game.description;
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+
+    // move focus into modal
+    (modalClose || modal).focus();
+    document.addEventListener('keydown', onEsc, true);
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.removeEventListener('keydown', onEsc, true);
+    // return focus to the last focused element
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') lastFocusedEl.focus();
+  }
+
+  function onEsc(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeModal();
+    }
+  }
+
+  modalClose && modalClose.addEventListener('click', closeModal);
+  modal && modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
 
   // Render games
   function renderGame(data) {
     container.innerHTML = '';
     if (!data || data.length === 0) {
       container.innerHTML = '<p>No games found.</p>';
-      countEl.textContent = 'Showing 0 games';
+      if (countEl) countEl.textContent = 'Showing 0 games';
       return;
     }
 
     const frag = document.createDocumentFragment();
-    
 
     data.forEach(m => {
       const { id, title, maker, player_count, playtime, difficulty, genres, description, image } = m;
@@ -118,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Main content
       const main = document.createElement('div');
       main.className = 'card-main';
-
       const h3 = document.createElement('h3');
       h3.textContent = title;
 
@@ -130,9 +186,20 @@ document.addEventListener('DOMContentLoaded', () => {
       desc.className = 'game-info';
       desc.textContent = description;
 
+      // Learn More button
+      const learnMoreBtn = document.createElement('button');
+      learnMoreBtn.className = 'learn-more-btn';
+      learnMoreBtn.type = 'button';
+      learnMoreBtn.textContent = 'Learn More';
+      learnMoreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(m);
+      });
+
       main.appendChild(h3);
       main.appendChild(info);
       main.appendChild(desc);
+      main.appendChild(learnMoreBtn);
 
       // Meta (difficulty + genres)
       const meta = document.createElement('div');
@@ -155,14 +222,11 @@ document.addEventListener('DOMContentLoaded', () => {
       article.appendChild(img);
       article.appendChild(main);
       article.appendChild(meta);
-
       frag.appendChild(article);
-
-      article.addEventListener('click', () => openModal(m));
     });
 
     container.appendChild(frag);
-    countEl.textContent = `Showing ${data.length} games`;
+    if (countEl) countEl.textContent = `Showing ${data.length} games`;
   }
 
   // Fetch games JSON
@@ -177,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.error('Failed to load games:', err);
       container.innerHTML = '<p class="error">Unable to load games. Please try again later.</p>';
-      countEl.textContent = '';
+      if (countEl) countEl.textContent = '';
     }
   }
 
@@ -224,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mobile nav toggle
+  // Mobile nav toggle (if present)
   navToggle && navToggle.addEventListener('click', () => {
     const open = header.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -239,4 +303,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setView(viewMode);
   loadGames();
 });
+
 

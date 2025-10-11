@@ -1,0 +1,133 @@
+/* netlify/functions/geolocate.js
+   Simple Netlify function that creates/uses a server session for tabletop.events
+   and proxies GET /api/geolocation?query=... to tabletop.events.
+   - Uses environment variables for secrets (see README below)
+   - In-memory session + result caching (TTL)
+*/
+
+const BASE = 'https://tabletop.events';
+const SESSION_TTL_MS = 1000 * 60 * 60 * 2; // 2 hours
+const GEO_CACHE_TTL_MS = 1000 * 60 * 5;     // 5 minutes
+
+// simple in-memory cache (survives warm container; cold starts will be empty)
+let _cachedSession = null; // { id, expiresAt, cookieHeader }
+let _geoCache = new Map(); // map query -> { ts, data }
+
+// Helper: get env vars
+function getEnv(name) {
+  const v = process.env[name];
+  if (!v) console.warn(`env ${name} is not set`);
+  return v;
+}
+
+async function createSession() {
+  // If cached and still valid, return it
+  if (_cachedSession && Date.now() < _cachedSession.expiresAt) {
+    return _cachedSession;
+  }
+
+  const API_KEY_ID = getEnv('TTE_API_KEY_ID');
+  const DEV_USER = getEnv('TTE_DEV_USER'); // your tabletop.events developer username (email)
+  const DEV_PASS = getEnv('TTE_DEV_PASS'); // your tabletop.events developer password
+
+  if (!API_KEY_ID) {
+    throw new Error('Missing TTE_API_KEY_ID on server');
+  }
+  // The docs allow creating a session using developer credentials and api_key_id.
+  const url = `${BASE}/api/session`;
+  const body = {
+    api_key_id: API_KEY_ID,
+    username: DEV_USER,
+    password: DEV_PASS
+  };
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    redirect: 'manual'
+  });
+
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error('Failed to create session: ' + res.status + ' ' + txt);
+  }
+
+  // Some APIs return session info plus Set-Cookie. tabletop.events returns JSON with session?
+  const json = await res.json();
+
+  // Build a cookieHeader if the API returned cookies (attempt to read from headers is limited in serverless)
+  // We'll attempt to use session id from JSON if provided.
+  const cookieHeader = json?.session?.cookie || null;
+
+  // Cache session (approx TTL). If no TTL given, use SESSION_TTL_MS
+  _cachedSession = {
+    raw: json,
+    cookieHeader,
+    expiresAt: Date.now() + SESSION_TTL_MS
+  };
+
+  return _cachedSession;
+}
+
+async function fetchGeo(query) {
+  // Check short cache first
+  const key = String(query).toLowerCase().trim();
+  const cached = _geoCache.get(key);
+  if (cached && Date.now() - cached.ts < GEO_CACHE_TTL_MS) {
+    return cached.data;
+  }
+
+  // Ensure session exists (may be required to call geolocation)
+  const session = await createSession();
+
+  // Call the tabletop.events geolocation endpoint
+  const url = `${BASE}/api/geolocation?query=${encodeURIComponent(query)}`;
+  const headers = { 'Accept': 'application/json' };
+  if (session?.cookieHeader) headers['Cookie'] = session.cookieHeader;
+
+  const res = await fetch(url, { headers, redirect: 'manual' });
+  if (!res.ok) {
+    const text = await res.text();
+    const err = new Error(`Geo request failed: ${res.status} ${text}`);
+    err.status = res.status;
+    throw err;
+  }
+  const json = await res.json();
+
+  // Cache result
+  _geoCache.set(key, { ts: Date.now(), data: json });
+  return json;
+}
+
+exports.handler = async function(event) {
+  try {
+    // only allow GET + query param 'q' or 'query'
+    if (event.httpMethod !== 'GET') {
+      return { statusCode: 405, body: 'Method not allowed' };
+    }
+    const params = event.queryStringParameters || {};
+    const q = params.q || params.query;
+    if (!q) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing query param "q" or "query"' }) };
+    }
+
+    const geo = await fetchGeo(q);
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*' // allow calls from any origin (adjust if needed)
+      },
+      body: JSON.stringify(geo)
+    };
+  } catch (err) {
+    console.error('geolocate error', err);
+    return {
+      statusCode: err.status || 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: err.message || 'Server error' })
+    };
+  }
+};

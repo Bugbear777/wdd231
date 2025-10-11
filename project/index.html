@@ -52,15 +52,26 @@
 
       <div class="hero-overlay">
         <div class="hero-inner container">
-          <h1>Find Your Next Game</h1>
-          <p class="lead">Extensive library of board games — quick & epic.</p>
-          <p><a href="picker.html" class="btn btn-primary">Random Pick</a></p>
+          <h1>Find Your Next Gaming Convention</h1>
         </div>
       </div>
     </section>
-<section>
-    Placeholder Content
-</section>
+    <section id="conventions" class="container" aria-labelledby="conventions-heading" style="margin-top:18px;">
+      <h2 id="conventions-heading">Find gaming conventions near a place</h2>
+
+      <form id="geoForm" aria-label="Search conventions" class="geo-form" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+        <label for="geoQuery" class="sr-only">Search location</label>
+        <input id="geoQuery" type="search" placeholder="City, state or country (e.g. Phoenix, AZ)" required
+          style="flex:1;min-width:200px;padding:10px;border-radius:8px;border:1px solid var(--border);" />
+
+        <button id="geoSearchBtn" class="btn btn-primary" type="submit" style="padding:10px 14px;">Search</button>
+        <button id="geoUseMyLocation" class="btn" type="button" style="padding:10px 14px;border-color:rgba(0,0,0,0.06);">Use my location</button>
+      </form>
+
+      <div id="geoStatus" aria-live="polite" style="margin-top:10px;color:var(--muted);"></div>
+
+      <div id="geoResults" style="margin-top:12px;"></div>
+    </section>
   </main>
 
     <footer class="site-footer">
