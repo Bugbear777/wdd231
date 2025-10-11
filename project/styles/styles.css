@@ -55,7 +55,7 @@ main{ padding: 12px 0; margin-top: var(--header-height, 0px); }
 .main-nav a.active{ background:rgba(255,255,255,0.10); }
 
 .nav-toggle{
-  display:inline-block; background:transparent; border:0; color:#fff; padding:6px;
+  display:inline-block; border:0; color:#fff; padding:6px;
   position:relative; z-index:1001;
 }
 .nav-toggle .hamburger{ width:22px; height:2px; background:#fff; position:relative; }
@@ -305,4 +305,49 @@ section h2{ color:var(--primary); margin-top:0; font-family:"Playfair Display",s
   .footer-grid{ grid-template-columns:1fr; gap:.8rem; text-align:left; }
   .footer-col{ padding-bottom:.4rem; border-bottom:1px solid rgba(10,10,10,0.03); }
   .footer-col:last-child{ border-bottom:none; }
+}
+/* Mobile hamburger — force visible bars and hide button chrome */
+.nav-toggle{
+  background: transparent;      /* keep button itself clear */
+  color: #fff;                  /* bars use currentColor → white on green header */
+  border: 0;
+  padding: 8px;
+  line-height: 0;               /* no extra vertical space */
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.nav-toggle .hamburger{
+  position: relative;
+  width: 22px;
+  height: 2px;
+  background: currentColor;     /* middle bar */
+  border-radius: 2px;
+  display: block;
+}
+
+.nav-toggle .hamburger::before,
+.nav-toggle .hamburger::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;     /* top/bottom bars */
+  border-radius: 2px;
+}
+
+.nav-toggle .hamburger::before{ transform: translateY(-6px); }
+.nav-toggle .hamburger::after{  transform: translateY( 6px); }
+
+/* Optional: subtle feedback */
+.nav-toggle:focus-visible { outline: 2px solid rgba(255,255,255,.6); outline-offset: 3px; }
+.nav-toggle:hover { opacity: .9; }
+@media (min-width: 801px) {
+  .nav-toggle {
+    display: none !important;
+  }
 }
