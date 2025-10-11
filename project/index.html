@@ -10,7 +10,8 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/styles.css">
-  <script src="scripts/getdates.js" defer></script>
+  <script type="module" src="scripts/getdates.js"></script>
+
 
 
   <link rel="icon" href="./images/favicon.ico">
@@ -80,7 +81,7 @@
           <h2>Suggest a Game</h2>
           <p class="suggest-sub">Know a great tabletop game we’re missing? Send it in!</p>
 
-          <form id="suggestForm" novalidate>
+          <form id="suggestForm" action="suggested.html" method="get">
             <div class="field">
               <label for="sgTitle">Title <span aria-hidden="true">*</span></label>
               <input id="sgTitle" name="title" type="text" required maxlength="100" />

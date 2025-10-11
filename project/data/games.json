@@ -130,5 +130,60 @@
     "genres": ["Card Game", "Family", "Party"],
     "description": "Match colors and numbers to be the first to get rid of all your cards.",
     "image": "images/games/uno.webp"
+  },
+  {
+    "id": "risk",
+    "title": "Risk",
+    "maker": "Hasbro",
+    "player_count": "2–6",
+    "playtime": "120–240 min",
+    "difficulty": 2,
+    "genres": ["Strategy", "Warfare", "Territory Control"],
+    "description": "Deploy armies, forge alliances, and conquer the world in this classic game of global domination.",
+    "image": "images/games/risk.webp"
+  },
+  {
+    "id": "betrayal-at-house-on-the-hill",
+    "title": "Betrayal at House on the Hill",
+    "maker": "Avalon Hill",
+    "player_count": "3–6",
+    "playtime": "45–90 min",
+    "difficulty": 2,
+    "genres": ["Horror", "Cooperative", "Tile Placement"],
+    "description": "Explore a haunted mansion and uncover terrifying secrets—until one player turns traitor and the haunting begins.",
+    "image": "images/games/betrayal.webp"
+  },
+  {
+    "id": "gloomhaven",
+    "title": "Gloomhaven",
+    "maker": "Cephalofair Games",
+    "player_count": "1–4",
+    "playtime": "60–120 min",
+    "difficulty": 3,
+    "genres": ["Cooperative", "Campaign", "Dungeon Crawler"],
+    "description": "Lead a band of mercenaries through a sprawling world of tactical combat and branching storylines.",
+    "image": "images/games/gloomhaven.webp"
+  },
+  {
+    "id": "code-names",
+    "title": "Codenames",
+    "maker": "Czech Games Edition",
+    "player_count": "2–8",
+    "playtime": "15–30 min",
+    "difficulty": 1,
+    "genres": ["Party", "Word", "Deduction"],
+    "description": "Two teams compete to identify secret agents based on one-word clues from their spymaster.",
+    "image": "images/games/codenames.webp"
+  },
+  {
+    "id": "terraforming-mars",
+    "title": "Terraforming Mars",
+    "maker": "FryxGames",
+    "player_count": "1–5",
+    "playtime": "120 min",
+    "difficulty": 3,
+    "genres": ["Strategy", "Engine Building", "Science Fiction"],
+    "description": "Corporations compete to make Mars habitable by raising temperature, creating oceans, and developing infrastructure.",
+    "image": "images/games/terraforming_mars.webp"
   }
 ]

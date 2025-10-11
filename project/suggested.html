@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Suggested Game</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+  <header class="site-header">…(reuse your header)…</header>
+  <main class="container">
+    <section>
+      <h2>Your Submission</h2>
+      <div id="sgOut"></div>
+    </section>
+  </main>
+  <script type="module">
+    const out = document.getElementById('sgOut');
+    const params = new URLSearchParams(location.search);
+    // Display values safely
+    const fields = ['title','maker','player_count','playtime','difficulty','genres','description','image'];
+    const data = Object.fromEntries(fields.map(k => [k, params.get(k) || '']));
+    out.innerHTML = `
+      <p><strong>Title:</strong> ${data.title}</p>
+      <p><strong>Maker:</strong> ${data.maker}</p>
+      <p><strong>Players:</strong> ${data.player_count}</p>
+      <p><strong>Playtime:</strong> ${data.playtime}</p>
+      <p><strong>Difficulty:</strong> ${data.difficulty}</p>
+      <p><strong>Genres:</strong> ${data.genres}</p>
+      <p><strong>Description:</strong> ${data.description}</p>
+      ${data.image ? `<img src="${data.image}" alt="${data.title} cover" width="320" height="200" />` : ''}
+      <pre class="code">${JSON.stringify(data, null, 2)}</pre>
+    `;
+  </script>
+</body>
+</html>
